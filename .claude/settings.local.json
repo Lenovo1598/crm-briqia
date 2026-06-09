@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\PC - Backbone\\\\Desktop\\\\CRM\" -Recurse -Force)",
+      "Bash(Select-Object FullName, PSIsContainer)",
+      "Bash(ConvertTo-Json -Depth 100)",
+      "Bash(Out-String)",
+      "Bash(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\PC - Backbone\\\\Desktop\\\\CRM\\\\app\\\\api\\\\columns\\\\reorder\")",
+      "Bash(Out-Null)",
+      "Bash(Write-Output \"OK\")",
+      "PowerShell(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\PC - Backbone\\\\Desktop\\\\CRM\\\\app\\\\api\\\\columns\\\\reorder\")",
+      "PowerShell(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\PC - Backbone\\\\Desktop\\\\CRM\\\\app\\\\api\\\\stats\")",
+      "PowerShell(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\PC - Backbone\\\\Desktop\\\\CRM\\\\components\\\\dashboard\")"
+    ]
+  }
+}
