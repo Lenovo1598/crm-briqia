@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { query, queryOne } from '@/lib/db';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   const prompt = await queryOne(
     'SELECT id, content, is_default, is_active, version FROM system_prompts WHERE is_active = TRUE LIMIT 1'

@@ -1,4 +1,4 @@
-# 🔐 Team Ali CRM — Autenticación JWT
+# 🔐 Stragora Alliance CRM — Autenticación JWT
 
 ## Guía de Configuración
 
@@ -31,13 +31,13 @@ cp .env.local.example .env.local
 #### Opción B: PostgreSQL Local
 ```bash
 # Crear base de datos
-createdb team_ali_crm
+createdb stragora_alliance_crm
 
 # Conectar y ejecutar SQL
-psql team_ali_crm < sql/init-auth.sql
+psql stragora_alliance_crm < sql/init-auth.sql
 
 # Actualizar .env.local
-DATABASE_URL=postgresql://usuario:password@localhost:5432/team_ali_crm
+DATABASE_URL=postgresql://usuario:password@localhost:5432/stragora_alliance_crm
 ```
 
 ### 4️⃣ Configurar JWT_SECRET
@@ -149,4 +149,4 @@ Por implementar: `POST /api/users` (solo admin)
 
 ---
 
-**Referencia:** `ARQUITECTURA-CRM-TEAM-ALI.md` → Sección 5: API Routes
+**Referencia:** `ARQUITECTURA-CRM-STRAGORA-ALLIANCE.md` → Sección 5: API Routes

@@ -1,4 +1,4 @@
-# 🚀 SETUP Y DEPLOYMENT - CRM TEAM ALI
+# 🚀 SETUP Y DEPLOYMENT - CRM STRAGORA ALLIANCE
 
 ## Fase 1: Preparación del Entorno
 
@@ -32,9 +32,9 @@ cp .env.local.example .env.local
 # OPCIÓN B: PostgreSQL Local
 # 1. Instalar PostgreSQL 14+
 # 2. Crear database:
-#    createdb team_ali_crm
+#    createdb stragora_alliance_crm
 # 3. Connection string:
-#    postgresql://postgres:password@localhost:5432/team_ali_crm
+#    postgresql://postgres:password@localhost:5432/stragora_alliance_crm
 ```
 
 ---
@@ -245,13 +245,13 @@ npm run test
 ### Opción B: Docker
 ```bash
 # Construir imagen
-docker build -t team-ali-crm .
+docker build -t stragora-alliance-crm .
 
 # Ejecutar
 docker run -p 3000:3000 \
   -e DATABASE_URL=postgresql://... \
   -e JWT_SECRET=... \
-  team-ali-crm
+  stragora-alliance-crm
 ```
 
 ### Opción C: Self-hosted (Ubuntu/Debian)
@@ -346,7 +346,7 @@ Solución:
 pm2 logs crm
 
 # Docker logs
-docker logs -f team-ali-crm
+docker logs -f stragora-alliance-crm
 ```
 
 ### Performance
@@ -393,4 +393,4 @@ psql $DATABASE_URL < backup-20240101.sql
 
 **🎉 ¡LISTO PARA PRODUCCIÓN!**
 
-Para soporte: [documentación completa en ARQUITECTURA-CRM-TEAM-ALI.md]
+Para soporte: [documentación completa en ARQUITECTURA-CRM-STRAGORA-ALLIANCE.md]

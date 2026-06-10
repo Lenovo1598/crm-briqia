@@ -28,7 +28,7 @@ INSERT INTO kanban_columns (nombre, orden, color, visible) VALUES
   ('Freno La Busqueda',        11, '#EC4899', true),
   ('Caliente',                 12, '#EF4444', true),
   ('Busqueda Higth Ticket',    13, '#F59E0B', true),
-  ('Team Ali',                 14, '#3B82F6', true),
+  ('Stragora Alliance',        14, '#3B82F6', true),
   ('Trabaja Con Otro Agente',  15, '#10B981', true),
   ('Ya Resolvió',              16, '#F59E0B', true),
   ('Seguimiento De Magui',     17, '#8B5CF6', true),

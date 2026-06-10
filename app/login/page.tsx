@@ -35,7 +35,7 @@ export default function LoginPage() {
             <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-light rounded-xl mb-4">
               <span className="text-2xl font-bold text-primary">A</span>
             </div>
-            <h1 className="text-3xl font-bold text-gray-900">Team Ali</h1>
+            <h1 className="text-3xl font-bold text-gray-900">Stragora Alliance</h1>
             <p className="text-gray-600 text-sm mt-2">CRM Inmobiliario</p>
           </div>
 

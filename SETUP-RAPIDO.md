@@ -2,7 +2,7 @@
 
 ## ¿Qué Se Creó?
 
-Sistema completo de autenticación JWT para **Team Ali CRM** siguiendo exactamente la arquitectura del `ARQUITECTURA-CRM-TEAM-ALI.md`.
+Sistema completo de autenticación JWT para **Stragora Alliance CRM** siguiendo exactamente la arquitectura del `ARQUITECTURA-CRM-STRAGORA-ALLIANCE.md`.
 
 ---
 
@@ -155,7 +155,7 @@ JWT_SECRET=<generar con: node -e "console.log(require('crypto').randomBytes(32).
 # → SQL Editor > New Query > pegar sql/init-auth.sql
 
 # Opción B: PostgreSQL local
-psql team_ali_crm < sql/init-auth.sql
+psql stragora_alliance_crm < sql/init-auth.sql
 ```
 
 ### 4. Desarrollo
@@ -257,7 +257,7 @@ curl -X POST http://localhost:3000/api/auth/login \
 - `JWT_SECRET` — Secreto para firmar JWT (mín 32 chars)
 
 **OPCIONALES:**
-- `NEXT_PUBLIC_APP_NAME` — Nombre app (default: "Team Ali")
+- `NEXT_PUBLIC_APP_NAME` — Nombre app (default: "Stragora Alliance")
 - `NODE_ENV` — "development" o "production"
 
 ---
@@ -326,4 +326,4 @@ CREATE TABLE users (
 
 Siguiente: Migrar Kanban de leads + integración con BD
 
-Referencia: `ARQUITECTURA-CRM-TEAM-ALI.md` ✅
+Referencia: `ARQUITECTURA-CRM-STRAGORA-ALLIANCE.md` ✅

@@ -1,6 +1,6 @@
 -- ═══════════════════════════════════════
 -- INICIALIZACIÓN DE BASE DE DATOS
--- Team Ali CRM - Autenticación JWT
+-- Stragora Alliance CRM - Autenticación JWT
 -- ═══════════════════════════════════════
 
 -- Crear tabla users

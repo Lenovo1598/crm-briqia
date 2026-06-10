@@ -136,7 +136,7 @@ Una vez ejecutado `sql/init-auth.sql`:
 ## 🚀 Próximos Pasos
 
 ### Fase 1 Continuación
-1. Migrar componentes del `team-ali-crm.jsx` a Next.js
+1. Migrar componentes del `stragora-alliance-crm.jsx` a Next.js
 2. Implementar Kanban de leads
 3. Dashboard con métricas
 4. ON/OFF del agente (admin only)
@@ -158,7 +158,7 @@ Una vez ejecutado `sql/init-auth.sql`:
 ## 📚 Estructura de Carpetas Actual
 
 ```
-team-ali-crm/
+stragora-alliance-crm/
 ├── app/
 │   ├── api/
 │   │   └── auth/
@@ -202,4 +202,4 @@ team-ali-crm/
 
 **Sistema listo para Phase 1 complete. Siguiente: Migrar Kanban de leads.**
 
-Referencia: `ARQUITECTURA-CRM-TEAM-ALI.md` ✅ Seguida perfectamente
+Referencia: `ARQUITECTURA-CRM-STRAGORA-ALLIANCE.md` ✅ Seguida perfectamente

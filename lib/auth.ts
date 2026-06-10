@@ -72,7 +72,7 @@ export async function comparePassword(
 /**
  * Extraer token del header Authorization
  */
-export function getTokenFromHeader(authHeader?: string): string | null {
+export function getTokenFromHeader(authHeader?: string | null): string | null {
   if (!authHeader) return null;
 
   const parts = authHeader.split(' ');

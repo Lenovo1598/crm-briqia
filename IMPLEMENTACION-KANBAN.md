@@ -174,7 +174,7 @@ State actualizado → Re-render
 ### 1. Setup BD
 ```bash
 # Ejecutar SQL de inicialización
-psql team_ali_crm < sql/init-kanban.sql
+psql stragora_alliance_crm < sql/init-kanban.sql
 ```
 
 ### 2. Iniciar App
@@ -260,6 +260,6 @@ components/layout/
 
 **🎉 ¡KANBAN MIGRADO Y FUNCIONAL!**
 
-Referencia: `ARQUITECTURA-CRM-TEAM-ALI.md` ✅
+Referencia: `ARQUITECTURA-CRM-STRAGORA-ALLIANCE.md` ✅
 
 Stack: Next.js 14 + React + TypeScript + Tailwind + PostgreSQL ✅

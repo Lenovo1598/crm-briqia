@@ -3,8 +3,8 @@ import { AuthProvider } from '@/hooks/useAuth';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Team Ali CRM',
-  description: 'CRM Inmobiliario - Team Ali',
+  title: 'Stragora Alliance CRM',
+  description: 'CRM Inmobiliario - Stragora Alliance',
 };
 
 export default function RootLayout({

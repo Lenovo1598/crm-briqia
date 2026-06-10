@@ -1,4 +1,4 @@
-# ARQUITECTURA CRM — TEAM ALI
+# ARQUITECTURA CRM — STRAGORA ALLIANCE
 
 > Documento de referencia para desarrollo en Cursor.
 > Contiene TODO el contexto necesario: schema DB, estructura del proyecto, reglas de negocio, diseño y conexiones con n8n.
@@ -134,7 +134,7 @@ CREATE TABLE users (
 ## 3. ESTRUCTURA DEL PROYECTO (Next.js App Router)
 
 ```
-team-ali-crm/
+stragora-alliance-crm/
 ├── app/
 │   ├── layout.tsx                # Layout principal + font + metadata
 │   ├── page.tsx                  # Redirect a /dashboard
@@ -221,7 +221,7 @@ DATABASE_URL=postgresql://postgres:[PASSWORD]@[HOST]:5432/postgres
 JWT_SECRET=un_secreto_seguro_de_al_menos_32_caracteres
 
 # App
-NEXT_PUBLIC_APP_NAME=Team Ali
+NEXT_PUBLIC_APP_NAME=Stragora Alliance
 ```
 
 ---
