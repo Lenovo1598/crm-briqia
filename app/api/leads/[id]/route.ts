@@ -65,12 +65,16 @@ export async function PUT(
     const allowedFields = [
       'nombre',
       'estado',
-      'presupuesto',
-      'zona',
-      'tipo_propiedad',
-      'forma_pago',
-      'intencion',
-      'propiedad_interes',
+      'temperatura',
+      'pais_residencia',
+      'monto_inversion',
+      'plazo_inicio',
+      'medio_contacto_preferido',
+      'horario_contacto_preferido',
+      'conocimiento_realestate_usa',
+      'tiene_cuenta_bancaria_usa',
+      'tiene_empresa_usa',
+      'interes_visa_e2',
     ];
 
     for (const field of allowedFields) {

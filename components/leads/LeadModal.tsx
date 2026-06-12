@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Lead, KanbanColumn, columnToEstado } from '@/lib/leads';
+import { useState } from 'react';
+import { Lead, KanbanColumn, columnNameToTemperatura } from '@/lib/leads';
 import { Edit3, Phone, X } from 'lucide-react';
 
 interface LeadModalProps {
@@ -107,143 +107,177 @@ export function LeadModal({
                 />
               </div>
 
-              {/* Estado */}
+              {/* Temperatura */}
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1">
-                  Estado
+                  Temperatura
                 </label>
                 <select
-                  value={form.estado}
+                  value={form.temperatura || ''}
                   onChange={(e) =>
-                    setForm({ ...form, estado: e.target.value as any })
+                    setForm({ ...form, temperatura: e.target.value || null })
                   }
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/10"
                 >
+                  <option value="">Sin definir</option>
                   {columns.map((col) => (
-                    <option key={col.id} value={columnToEstado(col.nombre)}>
+                    <option key={col.id} value={columnNameToTemperatura(col.nombre)}>
                       {col.nombre}
                     </option>
                   ))}
                 </select>
               </div>
 
-              {/* Presupuesto */}
+              {/* País de Residencia */}
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1">
-                  Presupuesto (USD)
+                  País de Residencia
+                </label>
+                <input
+                  type="text"
+                  value={form.pais_residencia || ''}
+                  onChange={(e) =>
+                    setForm({ ...form, pais_residencia: e.target.value || null })
+                  }
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/10"
+                />
+              </div>
+
+              {/* Monto de Inversión */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">
+                  Monto de Inversión (USD)
                 </label>
                 <input
                   type="number"
-                  value={form.presupuesto || ''}
+                  value={form.monto_inversion || ''}
                   onChange={(e) =>
                     setForm({
                       ...form,
-                      presupuesto: e.target.value ? Number(e.target.value) : null,
+                      monto_inversion: e.target.value || null,
                     })
                   }
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/10"
                 />
               </div>
 
-              {/* Zona */}
+              {/* Plazo para Iniciar */}
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1">
-                  Zona
+                  Plazo para Iniciar
                 </label>
                 <input
                   type="text"
-                  value={form.zona || ''}
+                  value={form.plazo_inicio || ''}
                   onChange={(e) =>
-                    setForm({ ...form, zona: e.target.value || null })
+                    setForm({ ...form, plazo_inicio: e.target.value || null })
                   }
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/10"
                 />
               </div>
 
-              {/* Tipo Propiedad */}
+              {/* Medio de Contacto Preferido */}
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1">
-                  Tipo Propiedad
-                </label>
-                <select
-                  value={form.tipo_propiedad || ''}
-                  onChange={(e) =>
-                    setForm({
-                      ...form,
-                      tipo_propiedad: e.target.value || null,
-                    })
-                  }
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/10"
-                >
-                  <option value="">Sin definir</option>
-                  <option value="departamento">Departamento</option>
-                  <option value="casa">Casa</option>
-                  <option value="ph">PH</option>
-                  <option value="terreno">Terreno</option>
-                  <option value="local">Local</option>
-                </select>
-              </div>
-
-              {/* Forma de Pago */}
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1">
-                  Forma de Pago
-                </label>
-                <select
-                  value={form.forma_pago || ''}
-                  onChange={(e) =>
-                    setForm({
-                      ...form,
-                      forma_pago: e.target.value || null,
-                    })
-                  }
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/10"
-                >
-                  <option value="">Sin definir</option>
-                  <option value="contado">Contado</option>
-                  <option value="financiado">Financiado</option>
-                  <option value="hipotecario">Hipotecario</option>
-                  <option value="mixto">Mixto</option>
-                </select>
-              </div>
-
-              {/* Intención */}
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1">
-                  Intención
-                </label>
-                <select
-                  value={form.intencion || ''}
-                  onChange={(e) =>
-                    setForm({
-                      ...form,
-                      intencion: e.target.value || null,
-                    })
-                  }
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/10"
-                >
-                  <option value="">Sin definir</option>
-                  <option value="comprar">Comprar</option>
-                  <option value="vender">Vender</option>
-                </select>
-              </div>
-
-              {/* Propiedad Interés */}
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1">
-                  Propiedad de Interés
+                  Medio de Contacto Preferido
                 </label>
                 <input
                   type="text"
-                  value={form.propiedad_interes || ''}
+                  value={form.medio_contacto_preferido || ''}
                   onChange={(e) =>
-                    setForm({
-                      ...form,
-                      propiedad_interes: e.target.value || null,
-                    })
+                    setForm({ ...form, medio_contacto_preferido: e.target.value || null })
                   }
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/10"
                 />
+              </div>
+
+              {/* Horario de Contacto Preferido */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">
+                  Horario de Contacto Preferido
+                </label>
+                <input
+                  type="text"
+                  value={form.horario_contacto_preferido || ''}
+                  onChange={(e) =>
+                    setForm({ ...form, horario_contacto_preferido: e.target.value || null })
+                  }
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/10"
+                />
+              </div>
+
+              {/* Conocimiento Real Estate USA */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">
+                  Conocimiento de Real Estate en USA
+                </label>
+                <select
+                  value={form.conocimiento_realestate_usa || ''}
+                  onChange={(e) =>
+                    setForm({ ...form, conocimiento_realestate_usa: e.target.value || null })
+                  }
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/10"
+                >
+                  <option value="">Sin definir</option>
+                  <option value="si">Sí</option>
+                  <option value="no">No</option>
+                  <option value="parcial">Parcial</option>
+                </select>
+              </div>
+
+              {/* Cuenta Bancaria USA */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">
+                  ¿Tiene Cuenta Bancaria en USA?
+                </label>
+                <select
+                  value={form.tiene_cuenta_bancaria_usa || ''}
+                  onChange={(e) =>
+                    setForm({ ...form, tiene_cuenta_bancaria_usa: e.target.value || null })
+                  }
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/10"
+                >
+                  <option value="">Sin definir</option>
+                  <option value="si">Sí</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+
+              {/* Empresa en USA */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">
+                  ¿Tiene Empresa en USA?
+                </label>
+                <select
+                  value={form.tiene_empresa_usa || ''}
+                  onChange={(e) =>
+                    setForm({ ...form, tiene_empresa_usa: e.target.value || null })
+                  }
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/10"
+                >
+                  <option value="">Sin definir</option>
+                  <option value="si">Sí</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+
+              {/* Interés Visa E2 */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">
+                  Interés en Visa E2
+                </label>
+                <select
+                  value={form.interes_visa_e2 || ''}
+                  onChange={(e) =>
+                    setForm({ ...form, interes_visa_e2: e.target.value || null })
+                  }
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/10"
+                >
+                  <option value="">Sin definir</option>
+                  <option value="si">Sí</option>
+                  <option value="no">No</option>
+                  <option value="consultar">Consultar</option>
+                </select>
               </div>
 
               {/* Guardar */}
@@ -259,56 +293,80 @@ export function LeadModal({
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <p className="text-xs text-gray-600 font-semibold uppercase tracking-wider mb-1">
-                  Estado
+                  Temperatura
                 </p>
-                <p className="font-semibold text-gray-900">{form.estado}</p>
+                <p className="font-semibold text-gray-900">{form.temperatura || '—'}</p>
               </div>
               <div>
                 <p className="text-xs text-gray-600 font-semibold uppercase tracking-wider mb-1">
-                  Presupuesto
+                  Monto de Inversión
                 </p>
                 <p className="font-semibold text-gray-900">
-                  US$ {form.presupuesto || '0'}
-                </p>
-              </div>
-              <div>
-                <p className="text-xs text-gray-600 font-semibold uppercase tracking-wider mb-1">
-                  Zona
-                </p>
-                <p className="font-semibold text-gray-900">
-                  {form.zona || '—'}
+                  US$ {form.monto_inversion || '0'}
                 </p>
               </div>
               <div>
                 <p className="text-xs text-gray-600 font-semibold uppercase tracking-wider mb-1">
-                  Tipo
+                  País de Residencia
                 </p>
                 <p className="font-semibold text-gray-900">
-                  {form.tipo_propiedad || '—'}
+                  {form.pais_residencia || '—'}
                 </p>
               </div>
               <div>
                 <p className="text-xs text-gray-600 font-semibold uppercase tracking-wider mb-1">
-                  Forma Pago
+                  Plazo para Iniciar
                 </p>
                 <p className="font-semibold text-gray-900">
-                  {form.forma_pago || '—'}
+                  {form.plazo_inicio || '—'}
                 </p>
               </div>
               <div>
                 <p className="text-xs text-gray-600 font-semibold uppercase tracking-wider mb-1">
-                  Intención
+                  Medio de Contacto
                 </p>
                 <p className="font-semibold text-gray-900">
-                  {form.intencion || '—'}
+                  {form.medio_contacto_preferido || '—'}
                 </p>
               </div>
-              <div className="col-span-2">
+              <div>
                 <p className="text-xs text-gray-600 font-semibold uppercase tracking-wider mb-1">
-                  Propiedad Interés
+                  Horario de Contacto
                 </p>
                 <p className="font-semibold text-gray-900">
-                  {form.propiedad_interes || '—'}
+                  {form.horario_contacto_preferido || '—'}
+                </p>
+              </div>
+              <div>
+                <p className="text-xs text-gray-600 font-semibold uppercase tracking-wider mb-1">
+                  Conoce Real Estate USA
+                </p>
+                <p className="font-semibold text-gray-900">
+                  {form.conocimiento_realestate_usa || '—'}
+                </p>
+              </div>
+              <div>
+                <p className="text-xs text-gray-600 font-semibold uppercase tracking-wider mb-1">
+                  Cuenta Bancaria USA
+                </p>
+                <p className="font-semibold text-gray-900">
+                  {form.tiene_cuenta_bancaria_usa || '—'}
+                </p>
+              </div>
+              <div>
+                <p className="text-xs text-gray-600 font-semibold uppercase tracking-wider mb-1">
+                  Empresa en USA
+                </p>
+                <p className="font-semibold text-gray-900">
+                  {form.tiene_empresa_usa || '—'}
+                </p>
+              </div>
+              <div>
+                <p className="text-xs text-gray-600 font-semibold uppercase tracking-wider mb-1">
+                  Interés Visa E2
+                </p>
+                <p className="font-semibold text-gray-900">
+                  {form.interes_visa_e2 || '—'}
                 </p>
               </div>
               <div className="col-span-2">

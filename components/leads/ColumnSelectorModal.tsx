@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from 'react';
 import { X, Columns } from 'lucide-react';
-import { KanbanColumn, Lead } from '@/lib/leads';
+import { KanbanColumn, Lead, resolveColumnName } from '@/lib/leads';
 import { ColumnOrderItem } from './ColumnOrderItem';
 
 interface DeleteConfirmState {
@@ -93,7 +93,7 @@ export function ColumnSelectorModal({
 
   // ── Eliminar ──────────────────────────────────────────────────
   const handleDeleteRequest = async (column: KanbanColumn) => {
-    const count = leads.filter(l => l.estado === column.nombre).length;
+    const count = leads.filter(l => resolveColumnName(l.temperatura, columns) === column.nombre).length;
     if (count > 0) {
       setDeleteConfirm({ column, leadCount: count });
       setMoveToColumn('');
@@ -126,7 +126,7 @@ export function ColumnSelectorModal({
   const visibleColumns = columns.filter(c => c.visible);
 
   const getLeadsForColumn = (columnName: string) =>
-    leads.filter(l => l.estado === columnName).slice(0, 3);
+    leads.filter(l => resolveColumnName(l.temperatura, columns) === columnName).slice(0, 3);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
@@ -206,7 +206,7 @@ export function ColumnSelectorModal({
                 >
                   {visibleColumns.map(col => {
                     const colLeads = getLeadsForColumn(col.nombre);
-                    const totalCount = leads.filter(l => l.estado === col.nombre).length;
+                    const totalCount = leads.filter(l => resolveColumnName(l.temperatura, columns) === col.nombre).length;
                     return (
                       <div
                         key={col.id}
@@ -235,8 +235,8 @@ export function ColumnSelectorModal({
                               <p className="text-[11px] font-medium text-gray-800 truncate">
                                 {lead.nombre || lead.whatsapp_id}
                               </p>
-                              {lead.zona && (
-                                <p className="text-[10px] text-gray-400 truncate">{lead.zona}</p>
+                              {lead.pais_residencia && (
+                                <p className="text-[10px] text-gray-400 truncate">{lead.pais_residencia}</p>
                               )}
                             </div>
                           ))}

@@ -4,22 +4,22 @@ import { Lead } from '@/lib/leads';
 
 /**
  * GET /api/leads
- * Query params: ?estado=frio&search=nombre&propiedad=116
+ * Query params: ?temperatura=frio&search=nombre&pais=Mexico
  */
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const estado = searchParams.get('estado');
+    const temperatura = searchParams.get('temperatura');
     const search = searchParams.get('search');
-    const propiedad = searchParams.get('propiedad');
+    const pais = searchParams.get('pais');
 
     let sql = 'SELECT * FROM leads WHERE 1=1';
     const params: any[] = [];
     let paramIndex = 1;
 
-    if (estado) {
-      sql += ` AND estado = $${paramIndex}`;
-      params.push(estado);
+    if (temperatura) {
+      sql += ` AND temperatura = $${paramIndex}`;
+      params.push(temperatura);
       paramIndex++;
     }
 
@@ -29,9 +29,9 @@ export async function GET(request: NextRequest) {
       paramIndex++;
     }
 
-    if (propiedad) {
-      sql += ` AND propiedad_interes = $${paramIndex}`;
-      params.push(propiedad);
+    if (pais) {
+      sql += ` AND pais_residencia = $${paramIndex}`;
+      params.push(pais);
       paramIndex++;
     }
 
@@ -61,12 +61,16 @@ export async function POST(request: NextRequest) {
       whatsapp_id,
       nombre,
       estado,
-      presupuesto,
-      zona,
-      tipo_propiedad,
-      forma_pago,
-      intencion,
-      propiedad_interes,
+      temperatura,
+      pais_residencia,
+      monto_inversion,
+      plazo_inicio,
+      medio_contacto_preferido,
+      horario_contacto_preferido,
+      conocimiento_realestate_usa,
+      tiene_cuenta_bancaria_usa,
+      tiene_empresa_usa,
+      interes_visa_e2,
     } = body;
 
     if (!whatsapp_id) {
@@ -78,11 +82,13 @@ export async function POST(request: NextRequest) {
 
     const sql = `
       INSERT INTO leads (
-        whatsapp_id, nombre, estado, presupuesto, zona,
-        tipo_propiedad, forma_pago, intencion, propiedad_interes,
+        whatsapp_id, nombre, estado, temperatura, pais_residencia,
+        monto_inversion, plazo_inicio, medio_contacto_preferido,
+        horario_contacto_preferido, conocimiento_realestate_usa,
+        tiene_cuenta_bancaria_usa, tiene_empresa_usa, interes_visa_e2,
         created_at, updated_at
       )
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, NOW(), NOW())
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, NOW(), NOW())
       RETURNING *
     `;
 
@@ -90,12 +96,16 @@ export async function POST(request: NextRequest) {
       whatsapp_id,
       nombre || null,
       estado || 'frio',
-      presupuesto || null,
-      zona || null,
-      tipo_propiedad || null,
-      forma_pago || null,
-      intencion || null,
-      propiedad_interes || null,
+      temperatura || 'frio',
+      pais_residencia || null,
+      monto_inversion || null,
+      plazo_inicio || null,
+      medio_contacto_preferido || null,
+      horario_contacto_preferido || null,
+      conocimiento_realestate_usa || null,
+      tiene_cuenta_bancaria_usa || null,
+      tiene_empresa_usa || null,
+      interes_visa_e2 || null,
     ]);
 
     return NextResponse.json(lead, { status: 201 });

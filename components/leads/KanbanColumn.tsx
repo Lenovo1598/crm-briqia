@@ -1,6 +1,6 @@
 'use client';
 
-import { Lead, KanbanColumn as IKanbanColumn, estadoToColumn } from '@/lib/leads';
+import { Lead, KanbanColumn as IKanbanColumn } from '@/lib/leads';
 import { LeadCard } from './LeadCard';
 import { MoreVertical } from 'lucide-react';
 

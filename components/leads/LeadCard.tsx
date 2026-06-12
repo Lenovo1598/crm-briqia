@@ -1,6 +1,6 @@
 'use client';
 
-import { Lead, getLeadDisplayName, formatCurrency, estadoToColumn, KanbanColumn } from '@/lib/leads';
+import { Lead, getLeadDisplayName, formatCurrency, KanbanColumn } from '@/lib/leads';
 import { Phone, MessageSquare } from 'lucide-react';
 
 interface LeadCardProps {
@@ -23,39 +23,39 @@ export function LeadCard({ lead, column, onOpen, onDragStart }: LeadCardProps) {
       onClick={() => onOpen(lead)}
       className="bg-white border border-gray-200 rounded-lg p-3 mb-2 cursor-grab active:cursor-grabbing hover:shadow-md hover:translate-y-[-1px] transition-all"
     >
-      {/* Nombre + Presupuesto */}
+      {/* Nombre + Monto de inversión */}
       <div className="flex justify-between items-start mb-2">
         <span className="font-semibold text-sm text-gray-900 truncate flex-1">
           {displayName}
         </span>
         <span className="text-xs text-gray-500 font-medium ml-2 flex-shrink-0">
-          {formatCurrency(lead.presupuesto)}
+          {formatCurrency(lead.monto_inversion)}
         </span>
       </div>
 
-      {/* Estado Badge */}
+      {/* Temperatura Badge */}
       <div className="mb-2">
         <span
           className="inline-block px-2 py-1 rounded text-white text-xs font-semibold"
           style={{ backgroundColor: column.color }}
         >
-          {lead.estado}
+          {lead.temperatura || column.nombre}
         </span>
       </div>
 
       {/* Info */}
       <div className="text-xs text-gray-600 space-y-1">
-        {lead.zona && (
+        {lead.pais_residencia && (
           <div className="flex items-center gap-1">
-            <span>📍</span>
-            <span className="truncate">{lead.zona}</span>
+            <span>🌎</span>
+            <span className="truncate">{lead.pais_residencia}</span>
           </div>
         )}
 
-        {lead.tipo_propiedad && (
+        {lead.plazo_inicio && (
           <div className="flex items-center gap-1">
-            <span>🏠</span>
-            <span className="truncate">{lead.tipo_propiedad}</span>
+            <span>📅</span>
+            <span className="truncate">{lead.plazo_inicio}</span>
           </div>
         )}
 

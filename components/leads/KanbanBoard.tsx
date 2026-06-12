@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Lead, KanbanColumn, resolveColumnName, getUniqueProperties } from '@/lib/leads';
+import { Lead, KanbanColumn, resolveColumnName, getUniquePaises, columnNameToTemperatura } from '@/lib/leads';
 import { KanbanColumn as KanbanColumnComponent } from './KanbanColumn';
 import { LeadModal } from './LeadModal';
 import { AddColumnModal } from './AddColumnModal';
@@ -28,7 +28,7 @@ export function KanbanBoard({
     [...initialColumns].sort((a, b) => a.orden - b.orden)
   );
   const [search, setSearch] = useState('');
-  const [selectedProperty, setSelectedProperty] = useState('Todas');
+  const [selectedPais, setSelectedPais] = useState('Todos');
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
   const [showAddColumn, setShowAddColumn] = useState(false);
   const [showColumnSelector, setShowColumnSelector] = useState(false);
@@ -36,7 +36,7 @@ export function KanbanBoard({
   const [dragOverColumnId, setDragOverColumnId] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const properties = ['Todas', ...getUniqueProperties(leads)];
+  const paises = ['Todos', ...getUniquePaises(leads)];
 
   // Solo columnas visibles en el tablero
   const visibleColumns = columns.filter(c => c.visible);
@@ -47,9 +47,9 @@ export function KanbanBoard({
       !search ||
       (lead.nombre?.toLowerCase().includes(search.toLowerCase())) ||
       lead.whatsapp_id.includes(search);
-    const matchProperty =
-      selectedProperty === 'Todas' || lead.propiedad_interes === selectedProperty;
-    return matchSearch && matchProperty;
+    const matchPais =
+      selectedPais === 'Todos' || lead.pais_residencia === selectedPais;
+    return matchSearch && matchPais;
   });
 
   // Drop de lead en otra columna
@@ -63,7 +63,7 @@ export function KanbanBoard({
       const response = await fetch(`/api/leads/${draggedLead.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ estado: column.nombre }),
+        body: JSON.stringify({ temperatura: columnNameToTemperatura(column.nombre) }),
       });
       if (response.ok) {
         const updated = await response.json();
@@ -147,7 +147,12 @@ export function KanbanBoard({
         // Actualizar estado de leads localmente
         const col = columns.find(c => c.id === columnId);
         if (col) {
-          setLeads(prev => prev.map(l => l.estado === col.nombre ? { ...l, estado: moveTo } : l));
+          const newTemperatura = columnNameToTemperatura(moveTo);
+          setLeads(prev => prev.map(l =>
+            resolveColumnName(l.temperatura, columns) === col.nombre
+              ? { ...l, temperatura: newTemperatura }
+              : l
+          ));
         }
       }
     }
@@ -206,22 +211,22 @@ export function KanbanBoard({
           </div>
         </div>
 
-        {/* Filtros por propiedad */}
+        {/* Filtros por país de residencia */}
         <div className="flex gap-2 overflow-x-auto pb-1">
           <span className="text-sm text-gray-600 font-medium self-center whitespace-nowrap">
-            Productos:
+            País:
           </span>
-          {properties.map((prop) => (
+          {paises.map((pais) => (
             <button
-              key={prop}
-              onClick={() => setSelectedProperty(prop)}
+              key={pais}
+              onClick={() => setSelectedPais(pais)}
               className={`px-3 py-1 rounded-lg text-sm font-medium whitespace-nowrap transition ${
-                selectedProperty === prop
+                selectedPais === pais
                   ? 'bg-primary text-white'
                   : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
               }`}
             >
-              {prop}
+              {pais}
             </button>
           ))}
         </div>
@@ -232,7 +237,7 @@ export function KanbanBoard({
         <div className="flex gap-4">
           {visibleColumns.map((column) => {
             const columnLeads = filteredLeads.filter(
-              l => resolveColumnName(l.estado, columns) === column.nombre
+              l => resolveColumnName(l.temperatura, columns) === column.nombre
             );
             return (
               <KanbanColumnComponent
