@@ -5,7 +5,7 @@ import { verifyToken, getTokenFromHeader } from './lib/auth';
 const PUBLIC_ROUTES = ['/login', '/api/auth/login', '/chat'];
 const PUBLIC_PREFIXES = ['/api/demo/'];
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Permitir rutas públicas
@@ -32,7 +32,7 @@ export function middleware(request: NextRequest) {
         );
       }
 
-      const decoded = verifyToken(token);
+      const decoded = await verifyToken(token);
       if (!decoded) {
         return NextResponse.json(
           { error: 'Token inválido o expirado' },

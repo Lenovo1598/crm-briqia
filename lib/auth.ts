@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import { jwtVerify } from 'jose';
 import bcrypt from 'bcryptjs';
 
 export interface JWTPayload {
@@ -31,20 +32,23 @@ export function createToken(payload: JWTPayload): string {
 }
 
 /**
- * Verificar y decodificar un JWT
+ * Verificar y decodificar un JWT.
+ * Usa `jose` (Web Crypto) en lugar de `jsonwebtoken` (Node `crypto`)
+ * porque esta función se ejecuta en el middleware, que corre en el
+ * runtime Edge y no soporta el módulo `crypto` de Node.
  */
-export function verifyToken(token: string): JWTPayload | null {
+export async function verifyToken(token: string): Promise<JWTPayload | null> {
   try {
     const secret = process.env.JWT_SECRET;
     if (!secret) {
       throw new Error('JWT_SECRET no está definido');
     }
 
-    const decoded = jwt.verify(token, secret, {
+    const { payload } = await jwtVerify(token, new TextEncoder().encode(secret), {
       algorithms: ['HS256'],
-    }) as JWTPayload;
+    });
 
-    return decoded;
+    return payload as unknown as JWTPayload;
   } catch (error) {
     console.error('Error verificando token:', error);
     return null;
