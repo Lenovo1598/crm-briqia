@@ -39,7 +39,7 @@ export function LeadCard({ lead, column, onOpen, onDragStart }: LeadCardProps) {
           className="inline-block px-2 py-1 rounded text-white text-xs font-semibold"
           style={{ backgroundColor: column.color }}
         >
-          {lead.temperatura || column.nombre}
+          {column.nombre}
         </span>
       </div>
 
@@ -59,7 +59,7 @@ export function LeadCard({ lead, column, onOpen, onDragStart }: LeadCardProps) {
           </div>
         )}
 
-        {lead.whatsapp_id && (
+        {lead.whatsapp_id && displayName !== lead.whatsapp_id && (
           <div className="flex items-center gap-1">
             <span>📱</span>
             <span className="font-mono truncate text-xs">{lead.whatsapp_id}</span>
