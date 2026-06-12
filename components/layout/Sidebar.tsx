@@ -6,7 +6,6 @@ import {
   Users,
   MessageSquare,
   Calendar,
-  Building2,
   Compass,
   Megaphone,
   FileText,
@@ -45,7 +44,6 @@ export function Sidebar() {
     {
       label: 'CARTERA',
       items: [
-        { id: 'propiedades', label: 'Propiedades', icon: Building2, href: '/propiedades' },
         { id: 'busquedas', label: 'Búsquedas', icon: Compass, href: '/busquedas' },
         { id: 'campanas', label: 'Campañas Activas', icon: Megaphone, href: '/campanas' },
       ],
