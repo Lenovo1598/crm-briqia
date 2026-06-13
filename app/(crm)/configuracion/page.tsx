@@ -3,7 +3,8 @@
 import { AuthGuard } from '@/components/layout/AuthGuard';
 import { ApiKeysManager } from '@/components/configuracion/ApiKeysManager';
 import { WebhooksManager } from '@/components/configuracion/WebhooksManager';
-import { Webhook } from 'lucide-react';
+import { ChangePasswordForm } from '@/components/configuracion/ChangePasswordForm';
+import { Webhook, KeyRound } from 'lucide-react';
 
 export default function ConfiguracionPage() {
   return (
@@ -17,6 +18,14 @@ export default function ConfiguracionPage() {
         </div>
 
         <div className="p-6 max-w-3xl space-y-6">
+          <section className="bg-white border border-gray-200 rounded-xl p-5">
+            <div className="flex items-center gap-2 mb-3">
+              <KeyRound size={18} className="text-primary" />
+              <h2 className="text-base font-bold text-gray-900">Cambiar contraseña</h2>
+            </div>
+            <ChangePasswordForm />
+          </section>
+
           <section className="bg-white border border-gray-200 rounded-xl p-5">
             <div className="flex items-center gap-2 mb-1">
               <Webhook size={18} className="text-primary" />
