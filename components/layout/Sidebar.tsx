@@ -25,6 +25,7 @@ export function Sidebar() {
   const { user, logout } = useAuth();
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
   const sections = [
     {
@@ -143,7 +144,7 @@ export function Sidebar() {
               Configuración
             </button>
             <button
-              onClick={logout}
+              onClick={() => setShowLogoutConfirm(true)}
               className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-danger hover:bg-danger/10 text-sm transition"
             >
               <LogOut size={16} />
@@ -154,7 +155,7 @@ export function Sidebar() {
 
         {collapsed && (
           <button
-            onClick={logout}
+            onClick={() => setShowLogoutConfirm(true)}
             className="w-full flex items-center justify-center p-2 rounded-lg text-danger hover:bg-danger/10 transition"
             title="Cerrar sesión"
           >
@@ -162,6 +163,32 @@ export function Sidebar() {
           </button>
         )}
       </div>
+
+      {/* Modal de confirmación de cierre de sesión */}
+      {showLogoutConfirm && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-sm mx-4">
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Cerrar sesión</h3>
+            <p className="text-sm text-gray-600 mb-6">
+              ¿Estás seguro de que querés cerrar sesión?
+            </p>
+            <div className="flex justify-end gap-2">
+              <button
+                onClick={() => setShowLogoutConfirm(false)}
+                className="px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 transition"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={logout}
+                className="px-4 py-2 rounded-lg text-sm font-medium text-white bg-danger hover:bg-danger/90 transition"
+              >
+                Cerrar sesión
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
