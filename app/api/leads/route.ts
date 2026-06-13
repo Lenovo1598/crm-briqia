@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { query, queryOne } from '@/lib/db';
 import { Lead } from '@/lib/leads';
+import { dispatchWebhooks } from '@/lib/webhooks';
 
 /**
  * GET /api/leads
@@ -107,6 +108,8 @@ export async function POST(request: NextRequest) {
       tiene_empresa_usa || null,
       interes_visa_e2 || null,
     ]);
+
+    dispatchWebhooks('lead.created', lead);
 
     return NextResponse.json(lead, { status: 201 });
   } catch (error: any) {

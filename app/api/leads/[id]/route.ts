@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { queryOne, query } from '@/lib/db';
+import { dispatchWebhooks } from '@/lib/webhooks';
 
 /**
  * GET /api/leads/[id]
@@ -110,6 +111,8 @@ export async function PUT(
         { status: 404 }
       );
     }
+
+    dispatchWebhooks('lead.updated', lead);
 
     return NextResponse.json(lead);
   } catch (error) {

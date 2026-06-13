@@ -2,6 +2,7 @@
 
 import { AuthGuard } from '@/components/layout/AuthGuard';
 import { ApiKeysManager } from '@/components/configuracion/ApiKeysManager';
+import { WebhooksManager } from '@/components/configuracion/WebhooksManager';
 import { Webhook } from 'lucide-react';
 
 export default function ConfiguracionPage() {
@@ -34,11 +35,13 @@ export default function ConfiguracionPage() {
                 ) para leer y modificar leads, columnas y mensajes. Se puede
                 usar el JWT de login o una API Key permanente.
               </p>
-              <p>Próximamente: configuración de webhooks salientes hacia n8n.</p>
             </div>
 
             <h3 className="text-sm font-bold text-gray-900 mb-2">API Keys</h3>
             <ApiKeysManager />
+
+            <h3 className="text-sm font-bold text-gray-900 mt-6 mb-2">Webhooks salientes</h3>
+            <WebhooksManager />
           </section>
         </div>
       </div>
