@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyToken, getTokenFromHeader } from './lib/auth';
+import { verifyApiKey } from './lib/apiKeyVerify';
 
 // Rutas públicas (sin protección)
 const PUBLIC_ROUTES = ['/login', '/api/auth/login', '/chat'];
@@ -30,6 +31,22 @@ export async function middleware(request: NextRequest) {
           { error: 'No autorizado. Se requiere JWT en header Authorization' },
           { status: 401 }
         );
+      }
+
+      // Las API Keys (formato `crm_...`) se verifican contra Supabase
+      if (token.startsWith('crm_')) {
+        const apiKeyId = await verifyApiKey(token);
+        if (!apiKeyId) {
+          return NextResponse.json(
+            { error: 'API Key inválida o revocada' },
+            { status: 401 }
+          );
+        }
+
+        const response = NextResponse.next();
+        response.headers.set('x-user-id', apiKeyId.toString());
+        response.headers.set('x-user-role', 'service');
+        return response;
       }
 
       const decoded = await verifyToken(token);

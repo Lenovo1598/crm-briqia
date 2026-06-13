@@ -1,6 +1,7 @@
 'use client';
 
 import { AuthGuard } from '@/components/layout/AuthGuard';
+import { ApiKeysManager } from '@/components/configuracion/ApiKeysManager';
 import { Webhook } from 'lucide-react';
 
 export default function ConfiguracionPage() {
@@ -24,20 +25,20 @@ export default function ConfiguracionPage() {
               Conectividad para integraciones externas (n8n, Meta Ads, etc.)
             </p>
 
-            <div className="text-sm text-gray-600 space-y-2">
+            <div className="text-sm text-gray-600 space-y-2 mb-5">
               <p>
-                El CRM expone una API REST autenticada por JWT (header{' '}
+                El CRM expone una API REST autenticada (header{' '}
                 <code className="bg-gray-100 px-1.5 py-0.5 rounded text-xs">
                   Authorization: Bearer &lt;token&gt;
                 </code>
-                ) para leer y modificar leads, columnas y mensajes.
+                ) para leer y modificar leads, columnas y mensajes. Se puede
+                usar el JWT de login o una API Key permanente.
               </p>
-              <p>
-                Próximamente: gestión de API Keys persistentes y configuración
-                de webhooks salientes para notificar eventos a herramientas
-                externas como n8n.
-              </p>
+              <p>Próximamente: configuración de webhooks salientes hacia n8n.</p>
             </div>
+
+            <h3 className="text-sm font-bold text-gray-900 mb-2">API Keys</h3>
+            <ApiKeysManager />
           </section>
         </div>
       </div>
