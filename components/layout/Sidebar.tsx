@@ -139,10 +139,17 @@ export function Sidebar() {
 
         {!collapsed && (
           <div className="space-y-2">
-            <button className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100 text-sm transition">
+            <Link
+              href="/configuracion"
+              className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition ${
+                isActive('/configuracion')
+                  ? 'bg-primary-light text-primary font-semibold'
+                  : 'text-gray-700 hover:bg-gray-100'
+              }`}
+            >
               <Settings size={16} />
               Configuración
-            </button>
+            </Link>
             <button
               onClick={() => setShowLogoutConfirm(true)}
               className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-danger hover:bg-danger/10 text-sm transition"
