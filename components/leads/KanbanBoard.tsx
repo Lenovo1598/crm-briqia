@@ -52,6 +52,10 @@ export function KanbanBoard({
     return matchSearch && matchPais;
   });
 
+  const authHeader = () => ({
+    Authorization: `Bearer ${localStorage.getItem('auth_token')}`,
+  });
+
   // Drop de lead en otra columna
   const handleDrop = async (columnId: number) => {
     if (!draggedLead) return;
@@ -62,7 +66,7 @@ export function KanbanBoard({
     try {
       const response = await fetch(`/api/leads/${draggedLead.id}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...authHeader() },
         body: JSON.stringify({ temperatura: columnNameToTemperatura(column.nombre) }),
       });
       if (response.ok) {
@@ -84,7 +88,7 @@ export function KanbanBoard({
     try {
       const response = await fetch(`/api/leads/${updated.id}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...authHeader() },
         body: JSON.stringify(updated),
       });
       if (response.ok) {
@@ -106,7 +110,7 @@ export function KanbanBoard({
     try {
       const response = await fetch('/api/columns', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...authHeader() },
         body: JSON.stringify({ nombre, color }),
       });
       if (response.ok) {
@@ -126,7 +130,7 @@ export function KanbanBoard({
     const updates = updatedColumns.map((c, i) => ({ id: c.id, orden: i + 1, visible: c.visible }));
     const response = await fetch('/api/columns/reorder', {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', ...authHeader() },
       body: JSON.stringify({ updates }),
     });
     if (response.ok) {
@@ -140,7 +144,7 @@ export function KanbanBoard({
     const params = new URLSearchParams({ force: 'true' });
     if (moveTo) params.set('moveTo', moveTo);
 
-    const response = await fetch(`/api/columns/${columnId}?${params}`, { method: 'DELETE' });
+    const response = await fetch(`/api/columns/${columnId}?${params}`, { method: 'DELETE', headers: authHeader() });
     if (response.ok) {
       setColumns(prev => prev.filter(c => c.id !== columnId));
       if (moveTo) {
