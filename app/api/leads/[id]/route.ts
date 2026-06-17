@@ -76,6 +76,7 @@ export async function PUT(
       'tiene_cuenta_bancaria_usa',
       'tiene_empresa_usa',
       'interes_visa_e2',
+      'campana_id',
     ];
 
     for (const field of allowedFields) {
