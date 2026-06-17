@@ -109,7 +109,7 @@ export async function POST(request: NextRequest) {
       interes_visa_e2 || null,
     ]);
 
-    dispatchWebhooks('lead.created', lead);
+    await dispatchWebhooks('lead.created', lead);
 
     return NextResponse.json(lead, { status: 201 });
   } catch (error: any) {

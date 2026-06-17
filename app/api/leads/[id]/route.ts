@@ -112,7 +112,7 @@ export async function PUT(
       );
     }
 
-    dispatchWebhooks('lead.updated', lead);
+    await dispatchWebhooks('lead.updated', lead);
 
     return NextResponse.json(lead);
   } catch (error) {
