@@ -8,7 +8,6 @@ import {
   Calendar,
   Compass,
   Megaphone,
-  FileText,
   BookOpen,
   ChevronLeft,
   ChevronRight,
@@ -52,7 +51,6 @@ export function Sidebar() {
     {
       label: 'ASISTENTES',
       items: [
-        { id: 'cotizaciones', label: 'Cotizaciones', icon: FileText, href: '/cotizaciones' },
         { id: 'documentacion', label: 'Documentación', icon: BookOpen, href: '/documentacion' },
       ],
     },
