@@ -1,12 +1,12 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+﻿import { useState, useEffect, useCallback, useRef } from "react";
 import { Search, Plus, GripVertical, ChevronDown, ChevronRight, LayoutDashboard, Users, MessageSquare, Calendar, Building2, Compass, Megaphone, FileText, BookOpen, Settings, LogOut, X, Edit3, Phone, ExternalLink, MoreVertical, Filter, List, Columns3, TrendingUp, TrendingDown, Clock, ChevronLeft, Send, Paperclip, Star, Eye, Trash2, Power, Menu, UserCircle, Shield } from "lucide-react";
 
-// ═══════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // MOCK DATA
-// ═══════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 const INITIAL_COLUMNS = [
-  { id: 1, nombre: "Frío", orden: 1, color: "#6B7280" },
+  { id: 1, nombre: "FrÃ­o", orden: 1, color: "#6B7280" },
   { id: 2, nombre: "Tibios", orden: 2, color: "#F59E0B" },
   { id: 3, nombre: "Visitas", orden: 3, color: "#3B82F6" },
   { id: 4, nombre: "Calientes", orden: 4, color: "#EF4444" },
@@ -28,35 +28,35 @@ const INITIAL_LEADS = [
   { id: 7, whatsapp_id: "5492215733471", nombre: "Maria", estado: "tibio", presupuesto: 65, zona: "Venta", tipo_propiedad: "casa", forma_pago: null, intencion: null, propiedad_interes: null, created_at: "2026-03-22", updated_at: "2026-04-26" },
   { id: 8, whatsapp_id: "5492215733471b", nombre: "quiquemariano", estado: "tibio", presupuesto: 55, zona: "Algun", tipo_propiedad: "departamento", forma_pago: null, intencion: null, propiedad_interes: null, created_at: "2026-04-02", updated_at: "2026-04-24" },
   { id: 9, whatsapp_id: "5492214774152", nombre: "Nico R.", estado: "tibio", presupuesto: 34, zona: "Plata", tipo_propiedad: "departamento", forma_pago: null, intencion: null, propiedad_interes: null, created_at: "2026-04-08", updated_at: "2026-04-23" },
-  { id: 10, whatsapp_id: "5482215337524", nombre: "Verónica Salvi", estado: "visita", presupuesto: 0, zona: "Avisor", tipo_propiedad: null, forma_pago: null, intencion: null, propiedad_interes: null, created_at: "2026-02-15", updated_at: "2026-04-28" },
+  { id: 10, whatsapp_id: "5482215337524", nombre: "VerÃ³nica Salvi", estado: "visita", presupuesto: 0, zona: "Avisor", tipo_propiedad: null, forma_pago: null, intencion: null, propiedad_interes: null, created_at: "2026-02-15", updated_at: "2026-04-28" },
   { id: 11, whatsapp_id: "5917517484", nombre: "Vicky", estado: "visita", presupuesto: 140, zona: "Encima", tipo_propiedad: "departamento", forma_pago: null, intencion: null, propiedad_interes: null, created_at: "2026-03-05", updated_at: "2026-04-27" },
-  { id: 12, whatsapp_id: "5493392633842", nombre: "Oscar Piñeyro", estado: "visita", presupuesto: 0, zona: "Plata", tipo_propiedad: "departamento", forma_pago: null, intencion: null, propiedad_interes: null, created_at: "2026-03-18", updated_at: "2026-04-25" },
-  { id: 13, whatsapp_id: "5492216220842", nombre: "→) Noe (←", estado: "caliente", presupuesto: 50, zona: "Los", tipo_propiedad: "departamento", forma_pago: null, intencion: null, propiedad_interes: null, created_at: "2026-02-20", updated_at: "2026-04-28" },
+  { id: 12, whatsapp_id: "5493392633842", nombre: "Oscar PiÃ±eyro", estado: "visita", presupuesto: 0, zona: "Plata", tipo_propiedad: "departamento", forma_pago: null, intencion: null, propiedad_interes: null, created_at: "2026-03-18", updated_at: "2026-04-25" },
+  { id: 13, whatsapp_id: "5492216220842", nombre: "â†’) Noe (â†", estado: "caliente", presupuesto: 50, zona: "Los", tipo_propiedad: "departamento", forma_pago: null, intencion: null, propiedad_interes: null, created_at: "2026-02-20", updated_at: "2026-04-28" },
   { id: 14, whatsapp_id: "1156214412", nombre: "Luciano Morales", estado: "caliente", presupuesto: 120000, zona: "quilmes, bernal", tipo_propiedad: "casa", forma_pago: null, intencion: null, propiedad_interes: null, created_at: "2026-03-01", updated_at: "2026-04-28" },
-  { id: 15, whatsapp_id: "1168542861", nombre: "Estefanía", estado: "caliente", presupuesto: 121000, zona: "Quilmes, bernal", tipo_propiedad: "casa", forma_pago: null, intencion: null, propiedad_interes: null, created_at: "2026-03-12", updated_at: "2026-04-27" },
+  { id: 15, whatsapp_id: "1168542861", nombre: "EstefanÃ­a", estado: "caliente", presupuesto: 121000, zona: "Quilmes, bernal", tipo_propiedad: "casa", forma_pago: null, intencion: null, propiedad_interes: null, created_at: "2026-03-12", updated_at: "2026-04-27" },
   { id: 16, whatsapp_id: "2215312440", nombre: "Daniela Gvaernet", estado: "caliente", presupuesto: 150000, zona: "Gonnet", tipo_propiedad: null, forma_pago: null, intencion: null, propiedad_interes: null, created_at: "2026-03-25", updated_at: "2026-04-26" },
   { id: 17, whatsapp_id: "javier001", nombre: "Javier", estado: "llamada", presupuesto: null, zona: null, tipo_propiedad: null, forma_pago: null, intencion: null, propiedad_interes: null, created_at: "2026-04-01", updated_at: "2026-04-28" },
-  { id: 18, whatsapp_id: "josias001", nombre: "Josías", estado: "llamada", presupuesto: null, zona: null, tipo_propiedad: null, forma_pago: null, intencion: null, propiedad_interes: null, created_at: "2026-04-05", updated_at: "2026-04-27" },
+  { id: 18, whatsapp_id: "josias001", nombre: "JosÃ­as", estado: "llamada", presupuesto: null, zona: null, tipo_propiedad: null, forma_pago: null, intencion: null, propiedad_interes: null, created_at: "2026-04-05", updated_at: "2026-04-27" },
 ];
 
 const MOCK_CHATS = [
   { id: 1, name: "Nelly Echenique", phone: "549221540595B", lastMessage: "Busco casa casco urbano, con g...", unread: 100, propiedad: "116 E/ 34...", presupuesto: 200 },
-  { id: 2, name: "Luis Marinelli", phone: "5492216198542", lastMessage: "¡Que bueno saberlo! Mucha suert...", unread: 200, propiedad: "26 E/ 66...", presupuesto: 200 },
+  { id: 2, name: "Luis Marinelli", phone: "5492216198542", lastMessage: "Â¡Que bueno saberlo! Mucha suert...", unread: 200, propiedad: "26 E/ 66...", presupuesto: 200 },
   { id: 3, name: "549235249643...", phone: "549235249643", lastMessage: "", unread: 200, propiedad: "116 E/ 34...", presupuesto: 200, starred: true },
   { id: 4, name: "Nelida Pagnat", phone: "5492214957804", lastMessage: "Hola! Si, sigo buscando. Alrede...", unread: 200, propiedad: null, presupuesto: 200, tagged: "EDADES" },
-  { id: 5, name: "María", phone: "5492215733471", lastMessage: "", unread: 200, propiedad: null, presupuesto: 200, tagged: "EDADES" },
-  { id: 6, name: "Cecilia Soto", phone: "5492214770660", lastMessage: "Hola! ¿Cómo estás? Soy Maga, a...", unread: 200, propiedad: "31 E/ 480...", presupuesto: 200 },
-  { id: 7, name: "Marisol", phone: "5492214770671", lastMessage: "Hola! ¿Cómo estás? Soy Maga, a...", unread: 200, propiedad: "466 E/ 2...", presupuesto: 200 },
+  { id: 5, name: "MarÃ­a", phone: "5492215733471", lastMessage: "", unread: 200, propiedad: null, presupuesto: 200, tagged: "EDADES" },
+  { id: 6, name: "Cecilia Soto", phone: "5492214770660", lastMessage: "Hola! Â¿CÃ³mo estÃ¡s? Soy Maga, a...", unread: 200, propiedad: "31 E/ 480...", presupuesto: 200 },
+  { id: 7, name: "Marisol", phone: "5492214770671", lastMessage: "Hola! Â¿CÃ³mo estÃ¡s? Soy Maga, a...", unread: 200, propiedad: "466 E/ 2...", presupuesto: 200 },
 ];
 
 const MOCK_MESSAGES = [
-  { id: 1, type: "outgoing", content: "Hola! ¿Cómo estás? Soy Maga, asistente de Andrés Ali en RE/MAX Diagonal II. ¿Me podés darte un servicio que sigue activo o ya no necesitás? Contame qué estás buscando y en qué rangos te manejás, así te acomodo.", time: "03:54 p.m.", sender: "agent" },
+  { id: 1, type: "outgoing", content: "Hola! Â¿CÃ³mo estÃ¡s? Soy Maga, asistente de AndrÃ©s Ali en RE/MAX Diagonal II. Â¿Me podÃ©s darte un servicio que sigue activo o ya no necesitÃ¡s? Contame quÃ© estÃ¡s buscando y en quÃ© rangos te manejÃ¡s, asÃ­ te acomodo.", time: "03:54 p.m.", sender: "agent" },
   { id: 2, type: "incoming", content: "Busco casa casco urbano, con garage, habitable al momento, con espacios amplios, 2 o 3 dormitorios o escritorio gracias!!@", time: "08:27 p.m.", sender: "client" },
 ];
 
 const SEGUIMIENTOS = [
   { id: 1, fecha: "2026-04-29", tipo: "hoy", mensajes: 14, estado: "pendiente" },
-  { id: 2, fecha: "2026-04-30", tipo: "mañana", mensajes: 4, estado: "pendiente" },
+  { id: 2, fecha: "2026-04-30", tipo: "maÃ±ana", mensajes: 4, estado: "pendiente" },
   { id: 3, fecha: "2026-05-03", tipo: "mie", mensajes: 12, estado: "pendiente" },
 ];
 
@@ -68,17 +68,17 @@ const SEGUIMIENTOS_ENVIADOS = [
   { fecha: "2026-01-20", mensajes: 9 },
 ];
 
-// ═══════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // UTILITY FUNCTIONS
-// ═══════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 const estadoToColumn = (estado) => {
-  const map = { frio: "Frío", tibio: "Tibios", visita: "Visitas", caliente: "Calientes", llamada: "Llamadas" };
-  return map[estado] || "Frío";
+  const map = { frio: "FrÃ­o", tibio: "Tibios", visita: "Visitas", caliente: "Calientes", llamada: "Llamadas" };
+  return map[estado] || "FrÃ­o";
 };
 
 const columnToEstado = (col) => {
-  const map = { "Frío": "frio", "Tibios": "tibio", "Visitas": "visita", "Calientes": "caliente", "Llamadas": "llamada" };
+  const map = { "FrÃ­o": "frio", "Tibios": "tibio", "Visitas": "visita", "Calientes": "caliente", "Llamadas": "llamada" };
   return map[col] || "frio";
 };
 
@@ -90,11 +90,11 @@ const formatCurrency = (val) => {
 
 const getLeadDisplayName = (lead) => lead.nombre || lead.whatsapp_id || "Sin nombre";
 
-// ═══════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // COMPONENTS
-// ═══════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-// ── Badge ──
+// â”€â”€ Badge â”€â”€
 function Badge({ children, color = "#6B7280", variant = "filled" }) {
   if (variant === "outline") {
     return (
@@ -110,7 +110,7 @@ function Badge({ children, color = "#6B7280", variant = "filled" }) {
   );
 }
 
-// ── Stat Card ──
+// â”€â”€ Stat Card â”€â”€
 function StatCard({ title, value, subtitle, icon: Icon, trend }) {
   return (
     <div style={{ background: "#fff", border: "1px solid #E5E7EB", borderRadius: 12, padding: "20px 24px", flex: 1, minWidth: 200 }}>
@@ -130,7 +130,7 @@ function StatCard({ title, value, subtitle, icon: Icon, trend }) {
   );
 }
 
-// ── Lead Card ──
+// â”€â”€ Lead Card â”€â”€
 function LeadCard({ lead, onOpen, onDragStart, presupuesto }) {
   const name = getLeadDisplayName(lead);
   const col = estadoToColumn(lead.estado);
@@ -162,15 +162,15 @@ function LeadCard({ lead, onOpen, onDragStart, presupuesto }) {
         <Badge color={colData?.color || "#6B7280"}>{lead.estado}</Badge>
       </div>
       <div style={{ fontSize: 11, color: "#6B7280", lineHeight: 1.6 }}>
-        {lead.zona && <div>📍 {lead.zona}</div>}
-        {lead.tipo_propiedad && <div>🏠 {lead.tipo_propiedad} · {formatCurrency(lead.presupuesto)}</div>}
-        {lead.whatsapp_id && <div>📱 {lead.whatsapp_id}</div>}
+        {lead.zona && <div>ðŸ“ {lead.zona}</div>}
+        {lead.tipo_propiedad && <div>ðŸ  {lead.tipo_propiedad} Â· {formatCurrency(lead.presupuesto)}</div>}
+        {lead.whatsapp_id && <div>ðŸ“± {lead.whatsapp_id}</div>}
       </div>
     </div>
   );
 }
 
-// ── Lead Detail Modal ──
+// â”€â”€ Lead Detail Modal â”€â”€
 function LeadModal({ lead, onClose, onSave, columns }) {
   const [editing, setEditing] = useState(false);
   const [form, setForm] = useState({ ...lead });
@@ -217,8 +217,8 @@ function LeadModal({ lead, onClose, onSave, columns }) {
                 { label: "Zona", key: "zona", type: "text" },
                 { label: "Tipo propiedad", key: "tipo_propiedad", type: "select", options: [{ value: "departamento", label: "Departamento" }, { value: "casa", label: "Casa" }, { value: "ph", label: "PH" }, { value: "terreno", label: "Terreno" }, { value: "local", label: "Local" }] },
                 { label: "Forma de pago", key: "forma_pago", type: "select", options: [{ value: "contado", label: "Contado" }, { value: "financiado", label: "Financiado" }, { value: "hipotecario", label: "Hipotecario" }, { value: "mixto", label: "Mixto" }] },
-                { label: "Intención", key: "intencion", type: "select", options: [{ value: "comprar", label: "Comprar" }, { value: "vender", label: "Vender" }] },
-                { label: "Propiedad de interés", key: "propiedad_interes", type: "text" },
+                { label: "IntenciÃ³n", key: "intencion", type: "select", options: [{ value: "comprar", label: "Comprar" }, { value: "vender", label: "Vender" }] },
+                { label: "Propiedad de interÃ©s", key: "propiedad_interes", type: "text" },
               ].map(field => (
                 <div key={field.key}>
                   <label style={{ fontSize: 12, fontWeight: 600, color: "#374151", display: "block", marginBottom: 4 }}>{field.label}</label>
@@ -250,12 +250,12 @@ function LeadModal({ lead, onClose, onSave, columns }) {
               {[
                 { label: "Estado", value: lead.estado },
                 { label: "Presupuesto", value: formatCurrency(lead.presupuesto) },
-                { label: "Zona", value: lead.zona || "—" },
-                { label: "Tipo", value: lead.tipo_propiedad || "—" },
-                { label: "Forma de pago", value: lead.forma_pago || "—" },
-                { label: "Intención", value: lead.intencion || "—" },
-                { label: "Propiedad interés", value: lead.propiedad_interes || "—" },
-                { label: "Última interacción", value: lead.updated_at || "—" },
+                { label: "Zona", value: lead.zona || "â€”" },
+                { label: "Tipo", value: lead.tipo_propiedad || "â€”" },
+                { label: "Forma de pago", value: lead.forma_pago || "â€”" },
+                { label: "IntenciÃ³n", value: lead.intencion || "â€”" },
+                { label: "Propiedad interÃ©s", value: lead.propiedad_interes || "â€”" },
+                { label: "Ãšltima interacciÃ³n", value: lead.updated_at || "â€”" },
               ].map(item => (
                 <div key={item.label}>
                   <p style={{ fontSize: 11, color: "#9CA3AF", margin: 0, fontWeight: 500, textTransform: "uppercase", letterSpacing: 0.5 }}>{item.label}</p>
@@ -270,7 +270,7 @@ function LeadModal({ lead, onClose, onSave, columns }) {
   );
 }
 
-// ── Chat Panel (Modal) ──
+// â”€â”€ Chat Panel (Modal) â”€â”€
 function ChatModal({ lead, messages, onClose }) {
   const [msg, setMsg] = useState("");
   if (!lead) return null;
@@ -327,7 +327,7 @@ function ChatModal({ lead, messages, onClose }) {
   );
 }
 
-// ── Add Column Modal ──
+// â”€â”€ Add Column Modal â”€â”€
 function AddColumnModal({ onClose, onAdd }) {
   const [nombre, setNombre] = useState("");
   const [color, setColor] = useState("#6B7280");
@@ -367,7 +367,7 @@ function AddColumnModal({ onClose, onAdd }) {
   );
 }
 
-// ── Sidebar ──
+// â”€â”€ Sidebar â”€â”€
 function Sidebar({ active, onNavigate, collapsed, onToggle, isAdmin }) {
   const sections = [
     {
@@ -377,7 +377,7 @@ function Sidebar({ active, onNavigate, collapsed, onToggle, isAdmin }) {
       ]
     },
     {
-      label: "MENSAJERÍA", items: [
+      label: "MENSAJERÃA", items: [
         { id: "chats", label: "Chats", icon: MessageSquare },
         { id: "mensajes", label: "Mensajes Programados", icon: Calendar },
       ]
@@ -385,14 +385,14 @@ function Sidebar({ active, onNavigate, collapsed, onToggle, isAdmin }) {
     {
       label: "CARTERA", items: [
         { id: "propiedades", label: "Propiedades", icon: Building2 },
-        { id: "busquedas", label: "Búsquedas", icon: Compass },
-        { id: "campanas", label: "Campañas Activas", icon: Megaphone },
+        { id: "busquedas", label: "BÃºsquedas", icon: Compass },
+        { id: "campanas", label: "CampaÃ±as Activas", icon: Megaphone },
       ]
     },
     {
       label: "ASISTENTES", items: [
         { id: "cotizaciones", label: "Cotizaciones", icon: FileText },
-        { id: "documentacion", label: "Documentación", icon: BookOpen },
+        { id: "documentacion", label: "DocumentaciÃ³n", icon: BookOpen },
       ]
     },
   ];
@@ -415,7 +415,7 @@ function Sidebar({ active, onNavigate, collapsed, onToggle, isAdmin }) {
         <div style={{ width: 32, height: 32, borderRadius: 8, background: "#166534", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
           <span style={{ color: "#fff", fontWeight: 800, fontSize: 14 }}>A</span>
         </div>
-        {!collapsed && <span style={{ fontWeight: 700, fontSize: 15, color: "#111827", fontFamily: "'DM Sans', sans-serif" }}>Stragora Alliance</span>}
+        {!collapsed && <span style={{ fontWeight: 700, fontSize: 15, color: "#111827", fontFamily: "'DM Sans', sans-serif" }}>Briqia</span>}
         <button onClick={onToggle} style={{ marginLeft: "auto", background: "none", border: "none", cursor: "pointer", padding: 2 }}>
           {collapsed ? <ChevronRight size={16} color="#9CA3AF" /> : <ChevronLeft size={16} color="#9CA3AF" />}
         </button>
@@ -486,7 +486,7 @@ function Sidebar({ active, onNavigate, collapsed, onToggle, isAdmin }) {
   );
 }
 
-// ── Mini Chart (Dashboard) ──
+// â”€â”€ Mini Chart (Dashboard) â”€â”€
 function MiniChart() {
   const points = [10, 25, 18, 45, 30, 55, 40, 70, 35, 80, 60, 90, 50, 75, 85, 42, 65, 55, 70, 45, 60, 38, 50, 30, 40, 22, 35, 15, 28, 20];
   const max = Math.max(...points);
@@ -522,11 +522,11 @@ function MiniChart() {
   );
 }
 
-// ═══════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // PAGES
-// ═══════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-// ── Dashboard ──
+// â”€â”€ Dashboard â”€â”€
 function DashboardPage({ leads }) {
   const total = leads.length;
   const last7 = leads.filter(l => { const d = new Date(l.created_at); const now = new Date(); return (now - d) / 86400000 <= 7; }).length;
@@ -536,21 +536,21 @@ function DashboardPage({ leads }) {
     <div style={{ padding: "28px 32px", maxWidth: 1100 }}>
       <div style={{ marginBottom: 24 }}>
         <h1 style={{ margin: 0, fontSize: 22, fontWeight: 700, color: "#111827", fontFamily: "'DM Sans', sans-serif" }}>Dashboard</h1>
-        <p style={{ margin: "4px 0 0", fontSize: 14, color: "#6B7280" }}>Métricas y estadísticas de leads</p>
+        <p style={{ margin: "4px 0 0", fontSize: 14, color: "#6B7280" }}>MÃ©tricas y estadÃ­sticas de leads</p>
       </div>
 
       {/* Stats */}
       <div style={{ display: "flex", gap: 16, marginBottom: 28, flexWrap: "wrap" }}>
         <StatCard title="Total de Leads" value={total.toLocaleString()} subtitle="Todos los leads registrados" icon={Users} />
-        <StatCard title="Últimos 7 días" value={last7} subtitle="Leads ingresados esta semana" icon={Calendar} />
-        <StatCard title="Últimos 30 días" value={last30} subtitle="Leads ingresados este mes" icon={TrendingUp} />
+        <StatCard title="Ãšltimos 7 dÃ­as" value={last7} subtitle="Leads ingresados esta semana" icon={Calendar} />
+        <StatCard title="Ãšltimos 30 dÃ­as" value={last30} subtitle="Leads ingresados este mes" icon={TrendingUp} />
       </div>
 
       {/* Chart */}
       <div style={{ background: "#fff", border: "1px solid #E5E7EB", borderRadius: 12, padding: 24 }}>
         <div style={{ marginBottom: 16 }}>
-          <h3 style={{ margin: 0, fontSize: 15, fontWeight: 700, color: "#111827", fontFamily: "'DM Sans', sans-serif" }}>Leads por Período</h3>
-          <p style={{ margin: "4px 0 0", fontSize: 12, color: "#6B7280" }}>Total, tibios, fríos y calientes según fecha de ingreso · 30 días</p>
+          <h3 style={{ margin: 0, fontSize: 15, fontWeight: 700, color: "#111827", fontFamily: "'DM Sans', sans-serif" }}>Leads por PerÃ­odo</h3>
+          <p style={{ margin: "4px 0 0", fontSize: 12, color: "#6B7280" }}>Total, tibios, frÃ­os y calientes segÃºn fecha de ingreso Â· 30 dÃ­as</p>
         </div>
         <div style={{ display: "flex", gap: 12, marginBottom: 16, alignItems: "center" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 6, border: "1px solid #D1D5DB", borderRadius: 8, padding: "6px 12px" }}>
@@ -562,8 +562,8 @@ function DashboardPage({ leads }) {
             <span style={{ fontSize: 12, fontWeight: 500, color: "#111827" }}>23/04/2026</span>
           </div>
           <div style={{ display: "flex", gap: 4, marginLeft: 8 }}>
-            {["7 días", "30 días", "90 días", "Por defecto (30 días)"].map(p => (
-              <button key={p} style={{ padding: "5px 12px", border: "1px solid #D1D5DB", borderRadius: 6, background: p === "30 días" ? "#166534" : "#fff", color: p === "30 días" ? "#fff" : "#374151", fontSize: 11, fontWeight: 500, cursor: "pointer" }}>{p}</button>
+            {["7 dÃ­as", "30 dÃ­as", "90 dÃ­as", "Por defecto (30 dÃ­as)"].map(p => (
+              <button key={p} style={{ padding: "5px 12px", border: "1px solid #D1D5DB", borderRadius: 6, background: p === "30 dÃ­as" ? "#166534" : "#fff", color: p === "30 dÃ­as" ? "#fff" : "#374151", fontSize: 11, fontWeight: 500, cursor: "pointer" }}>{p}</button>
             ))}
           </div>
         </div>
@@ -576,7 +576,7 @@ function DashboardPage({ leads }) {
             <div style={{ width: 12, height: 3, borderRadius: 2, background: "#F59E0B" }} /> Tibios
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 11, color: "#6B7280" }}>
-            <div style={{ width: 12, height: 3, borderRadius: 2, background: "#3B82F6" }} /> Fríos
+            <div style={{ width: 12, height: 3, borderRadius: 2, background: "#3B82F6" }} /> FrÃ­os
           </div>
         </div>
       </div>
@@ -584,7 +584,7 @@ function DashboardPage({ leads }) {
   );
 }
 
-// ── Leads Kanban ──
+// â”€â”€ Leads Kanban â”€â”€
 function LeadsPage({ leads, setLeads, columns, setColumns, agentActive, setAgentActive, isAdmin }) {
   const [search, setSearch] = useState("");
   const [selectedProp, setSelectedProp] = useState("Todas");
@@ -633,7 +633,7 @@ function LeadsPage({ leads, setLeads, columns, setColumns, agentActive, setAgent
             <input
               value={search}
               onChange={e => setSearch(e.target.value)}
-              placeholder="Buscar por nombre o teléfono..."
+              placeholder="Buscar por nombre o telÃ©fono..."
               style={{ padding: "8px 12px 8px 32px", border: "1px solid #D1D5DB", borderRadius: 8, fontSize: 13, width: 240, outline: "none", background: "#fff" }}
             />
           </div>
@@ -752,7 +752,7 @@ function LeadsPage({ leads, setLeads, columns, setColumns, agentActive, setAgent
   );
 }
 
-// ── Chats Page ──
+// â”€â”€ Chats Page â”€â”€
 function ChatsPage({ agentActive, isAdmin, setAgentActive }) {
   const [selectedChat, setSelectedChat] = useState(MOCK_CHATS[0]);
   const [msg, setMsg] = useState("");
@@ -773,7 +773,7 @@ function ChatsPage({ agentActive, isAdmin, setAgentActive }) {
             <input
               value={searchChat}
               onChange={e => setSearchChat(e.target.value)}
-              placeholder="Buscar por nombre, teléfono, propiedad..."
+              placeholder="Buscar por nombre, telÃ©fono, propiedad..."
               style={{ width: "100%", padding: "8px 12px 8px 30px", border: "1px solid #D1D5DB", borderRadius: 8, fontSize: 12, outline: "none", boxSizing: "border-box" }}
             />
           </div>
@@ -846,7 +846,7 @@ function ChatsPage({ agentActive, isAdmin, setAgentActive }) {
             {/* Messages */}
             <div style={{ flex: 1, overflowY: "auto", padding: 16, display: "flex", flexDirection: "column", gap: 8 }}>
               <button style={{ alignSelf: "center", padding: "6px 16px", border: "1px solid #D1D5DB", borderRadius: 20, background: "#fff", fontSize: 12, color: "#6B7280", cursor: "pointer", marginBottom: 8 }}>
-                ▲ Cargar mensajes antiguos
+                â–² Cargar mensajes antiguos
               </button>
               <div style={{ textAlign: "center", margin: "8px 0" }}>
                 <span style={{ background: "#fff", padding: "4px 14px", borderRadius: 8, fontSize: 11, color: "#6B7280", boxShadow: "0 1px 2px rgba(0,0,0,0.08)" }}>Hoy</span>
@@ -861,7 +861,7 @@ function ChatsPage({ agentActive, isAdmin, setAgentActive }) {
                   }}>
                     <p style={{ margin: 0, fontSize: 13, color: "#111827", lineHeight: 1.5 }}>{m.content}</p>
                     <p style={{ margin: "4px 0 0", fontSize: 10, color: "#6B7280", textAlign: "right" }}>
-                      {m.time} {m.sender === "client" && <span style={{ fontSize: 10, color: "#9CA3AF", marginLeft: 4 }}>· Cliente</span>}
+                      {m.time} {m.sender === "client" && <span style={{ fontSize: 10, color: "#9CA3AF", marginLeft: 4 }}>Â· Cliente</span>}
                     </p>
                   </div>
                 </div>
@@ -884,7 +884,7 @@ function ChatsPage({ agentActive, isAdmin, setAgentActive }) {
           </>
         ) : (
           <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <p style={{ color: "#9CA3AF", fontSize: 14 }}>Seleccioná una conversación</p>
+            <p style={{ color: "#9CA3AF", fontSize: 14 }}>SeleccionÃ¡ una conversaciÃ³n</p>
           </div>
         )}
       </div>
@@ -892,7 +892,7 @@ function ChatsPage({ agentActive, isAdmin, setAgentActive }) {
   );
 }
 
-// ── Mensajes Programados ──
+// â”€â”€ Mensajes Programados â”€â”€
 function MensajesPage() {
   const [expandedDay, setExpandedDay] = useState(null);
 
@@ -901,20 +901,20 @@ function MensajesPage() {
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
         <div>
           <h1 style={{ margin: 0, fontSize: 22, fontWeight: 700, color: "#111827", fontFamily: "'DM Sans', sans-serif" }}>Mensajes Programados</h1>
-          <p style={{ margin: "4px 0 0", fontSize: 13, color: "#6B7280" }}>2513 pendiente(s) · 95 enviado(s)</p>
+          <p style={{ margin: "4px 0 0", fontSize: 13, color: "#6B7280" }}>2513 pendiente(s) Â· 95 enviado(s)</p>
         </div>
         <button style={{ display: "flex", alignItems: "center", gap: 6, padding: "8px 16px", border: "1px solid #D1D5DB", borderRadius: 8, background: "#fff", fontSize: 13, cursor: "pointer", fontWeight: 500, color: "#374151" }}>
           <Clock size={15} /> Actualizar
         </button>
       </div>
 
-      {/* Seguimiento orgánico */}
+      {/* Seguimiento orgÃ¡nico */}
       <div style={{ marginBottom: 32 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 14 }}>
           <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#F59E0B" }} />
-          <h3 style={{ margin: 0, fontSize: 15, fontWeight: 700, color: "#111827", fontFamily: "'DM Sans', sans-serif" }}>Seguimiento orgánico (182)</h3>
+          <h3 style={{ margin: 0, fontSize: 15, fontWeight: 700, color: "#111827", fontFamily: "'DM Sans', sans-serif" }}>Seguimiento orgÃ¡nico (182)</h3>
         </div>
-        <p style={{ fontSize: 12, color: "#6B7280", marginBottom: 14, marginTop: 0 }}>Mensajes programados que aún no se han enviado</p>
+        <p style={{ fontSize: 12, color: "#6B7280", marginBottom: 14, marginTop: 0 }}>Mensajes programados que aÃºn no se han enviado</p>
 
         <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
           {SEGUIMIENTOS.map(s => (
@@ -925,7 +925,7 @@ function MensajesPage() {
             }}>
               <div>
                 <p style={{ margin: 0, fontSize: 13, fontWeight: 600, color: "#111827" }}>
-                  {s.tipo === "hoy" ? "Hoy" : s.tipo === "mañana" ? "Mañana" : `mié, 3 jun`}
+                  {s.tipo === "hoy" ? "Hoy" : s.tipo === "maÃ±ana" ? "MaÃ±ana" : `miÃ©, 3 jun`}
                 </p>
                 <p style={{ margin: "2px 0 0", fontSize: 11, color: "#6B7280" }}>{s.mensajes} mensajes</p>
               </div>
@@ -970,21 +970,21 @@ function MensajesPage() {
   );
 }
 
-// ── Placeholder Pages ──
+// â”€â”€ Placeholder Pages â”€â”€
 function PlaceholderPage({ title, subtitle }) {
   return (
     <div style={{ padding: "28px 32px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "60vh" }}>
       <div style={{ background: "#F9FAFB", borderRadius: 16, padding: "48px 64px", textAlign: "center", border: "1px solid #E5E7EB" }}>
         <h2 style={{ margin: 0, fontSize: 20, fontWeight: 700, color: "#111827", fontFamily: "'DM Sans', sans-serif" }}>{title}</h2>
-        <p style={{ margin: "8px 0 0", fontSize: 14, color: "#6B7280" }}>{subtitle || "Esta sección se desarrollará próximamente."}</p>
+        <p style={{ margin: "8px 0 0", fontSize: 14, color: "#6B7280" }}>{subtitle || "Esta secciÃ³n se desarrollarÃ¡ prÃ³ximamente."}</p>
       </div>
     </div>
   );
 }
 
-// ═══════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // MAIN APP
-// ═══════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 export default function App() {
   const [page, setPage] = useState("dashboard");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -999,11 +999,11 @@ export default function App() {
       case "leads": return <LeadsPage leads={leads} setLeads={setLeads} columns={columns} setColumns={setColumns} agentActive={agentActive} setAgentActive={setAgentActive} isAdmin={isAdmin} />;
       case "chats": return <ChatsPage agentActive={agentActive} isAdmin={isAdmin} setAgentActive={setAgentActive} />;
       case "mensajes": return <MensajesPage />;
-      case "propiedades": return <PlaceholderPage title="Propiedades" subtitle="Tablero Kanban de propiedades — próximamente" />;
-      case "busquedas": return <PlaceholderPage title="Búsquedas" />;
-      case "campanas": return <PlaceholderPage title="Campañas Activas" />;
+      case "propiedades": return <PlaceholderPage title="Propiedades" subtitle="Tablero Kanban de propiedades â€” prÃ³ximamente" />;
+      case "busquedas": return <PlaceholderPage title="BÃºsquedas" />;
+      case "campanas": return <PlaceholderPage title="CampaÃ±as Activas" />;
       case "cotizaciones": return <PlaceholderPage title="Cotizaciones" />;
-      case "documentacion": return <PlaceholderPage title="Documentación" />;
+      case "documentacion": return <PlaceholderPage title="DocumentaciÃ³n" />;
       default: return <DashboardPage leads={leads} />;
     }
   };

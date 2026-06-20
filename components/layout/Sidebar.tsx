@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useAuth } from '@/hooks/useAuth';
 import {
@@ -35,7 +35,7 @@ export function Sidebar() {
       ],
     },
     {
-      label: 'MENSAJERÍA',
+      label: 'MENSAJERÃA',
       items: [
         { id: 'chats', label: 'Chats', icon: MessageSquare, href: '/chats' },
         { id: 'mensajes', label: 'Mensajes Programados', icon: Calendar, href: '/mensajes' },
@@ -44,14 +44,14 @@ export function Sidebar() {
     {
       label: 'CARTERA',
       items: [
-        { id: 'busquedas', label: 'Búsquedas', icon: Compass, href: '/busquedas' },
-        { id: 'campanas', label: 'Campañas Activas', icon: Megaphone, href: '/campanas' },
+        { id: 'busquedas', label: 'BÃºsquedas', icon: Compass, href: '/busquedas' },
+        { id: 'campanas', label: 'CampaÃ±as Activas', icon: Megaphone, href: '/campanas' },
       ],
     },
     {
       label: 'ASISTENTES',
       items: [
-        { id: 'documentacion', label: 'Documentación', icon: BookOpen, href: '/documentacion' },
+        { id: 'documentacion', label: 'DocumentaciÃ³n', icon: BookOpen, href: '/documentacion' },
       ],
     },
   ];
@@ -71,7 +71,7 @@ export function Sidebar() {
         <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center flex-shrink-0">
           <span className="text-white font-bold text-sm">A</span>
         </div>
-        {!collapsed && <span className="font-bold text-gray-900">Stragora Alliance</span>}
+        {!collapsed && <span className="font-bold text-gray-900">Briqia</span>}
         <button
           onClick={() => setCollapsed(!collapsed)}
           className="ml-auto p-1 hover:bg-gray-100 rounded transition"
@@ -146,14 +146,14 @@ export function Sidebar() {
               }`}
             >
               <Settings size={16} />
-              Configuración
+              ConfiguraciÃ³n
             </Link>
             <button
               onClick={() => setShowLogoutConfirm(true)}
               className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-danger hover:bg-danger/10 text-sm transition"
             >
               <LogOut size={16} />
-              Cerrar sesión
+              Cerrar sesiÃ³n
             </button>
           </div>
         )}
@@ -162,20 +162,20 @@ export function Sidebar() {
           <button
             onClick={() => setShowLogoutConfirm(true)}
             className="w-full flex items-center justify-center p-2 rounded-lg text-danger hover:bg-danger/10 transition"
-            title="Cerrar sesión"
+            title="Cerrar sesiÃ³n"
           >
             <LogOut size={16} />
           </button>
         )}
       </div>
 
-      {/* Modal de confirmación de cierre de sesión */}
+      {/* Modal de confirmaciÃ³n de cierre de sesiÃ³n */}
       {showLogoutConfirm && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-sm mx-4">
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Cerrar sesión</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Cerrar sesiÃ³n</h3>
             <p className="text-sm text-gray-600 mb-6">
-              ¿Estás seguro de que querés cerrar sesión?
+              Â¿EstÃ¡s seguro de que querÃ©s cerrar sesiÃ³n?
             </p>
             <div className="flex justify-end gap-2">
               <button
@@ -188,7 +188,7 @@ export function Sidebar() {
                 onClick={logout}
                 className="px-4 py-2 rounded-lg text-sm font-medium text-white bg-danger hover:bg-danger/90 transition"
               >
-                Cerrar sesión
+                Cerrar sesiÃ³n
               </button>
             </div>
           </div>

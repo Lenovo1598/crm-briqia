@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
@@ -35,7 +35,7 @@ export default function LoginPage() {
             <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-light rounded-xl mb-4">
               <span className="text-2xl font-bold text-primary">A</span>
             </div>
-            <h1 className="text-3xl font-bold text-gray-900">Stragora Alliance</h1>
+            <h1 className="text-3xl font-bold text-gray-900">Briqia</h1>
             <p className="text-gray-600 text-sm mt-2">CRM Inmobiliario</p>
           </div>
 
@@ -60,14 +60,14 @@ export default function LoginPage() {
             {/* Password */}
             <div>
               <label htmlFor="password" className="block text-sm font-semibold text-gray-700 mb-2">
-                Contraseña
+                ContraseÃ±a
               </label>
               <input
                 id="password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Ingresa tu contraseña"
+                placeholder="Ingresa tu contraseÃ±a"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition"
                 disabled={loading}
               />
@@ -94,7 +94,7 @@ export default function LoginPage() {
               ) : (
                 <>
                   <LogIn size={18} />
-                  Iniciar Sesión
+                  Iniciar SesiÃ³n
                 </>
               )}
             </button>
@@ -113,7 +113,7 @@ export default function LoginPage() {
         {/* Security Badge */}
         <div className="mt-6 flex items-center justify-center gap-2 text-white text-xs">
           <Lock size={14} />
-          <span>Conexión segura con encriptación JWT</span>
+          <span>ConexiÃ³n segura con encriptaciÃ³n JWT</span>
         </div>
       </div>
     </div>
