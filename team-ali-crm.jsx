@@ -415,7 +415,7 @@ function Sidebar({ active, onNavigate, collapsed, onToggle, isAdmin }) {
         <div style={{ width: 32, height: 32, borderRadius: 8, background: "#166534", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
           <span style={{ color: "#fff", fontWeight: 800, fontSize: 14 }}>A</span>
         </div>
-        {!collapsed && <span style={{ fontWeight: 700, fontSize: 15, color: "#111827", fontFamily: "'DM Sans', sans-serif" }}>Stragora Alliance</span>}
+        {!collapsed && <span style={{ fontWeight: 700, fontSize: 15, color: "#111827", fontFamily: "'DM Sans', sans-serif" }}>Briqia</span>}
         <button onClick={onToggle} style={{ marginLeft: "auto", background: "none", border: "none", cursor: "pointer", padding: 2 }}>
           {collapsed ? <ChevronRight size={16} color="#9CA3AF" /> : <ChevronLeft size={16} color="#9CA3AF" />}
         </button>

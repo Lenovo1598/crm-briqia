@@ -1,6 +1,6 @@
-# 🚀 SETUP Y DEPLOYMENT - CRM STRAGORA ALLIANCE
+﻿# ðŸš€ SETUP Y DEPLOYMENT - CRM Briqia
 
-## Fase 1: Preparación del Entorno
+## Fase 1: PreparaciÃ³n del Entorno
 
 ### 1.1 Node.js y npm
 ```bash
@@ -20,26 +20,26 @@ cp .env.local.example .env.local
 # - NODE_ENV: development o production
 ```
 
-**⚠️ IMPORTANTE:** Guardar `.env.local` en `.gitignore` (nunca commitear secrets)
+**âš ï¸ IMPORTANTE:** Guardar `.env.local` en `.gitignore` (nunca commitear secrets)
 
 ### 1.3 Base de Datos
 ```bash
-# OPCIÓN A: Supabase Cloud (RECOMENDADO)
+# OPCIÃ“N A: Supabase Cloud (RECOMENDADO)
 # 1. Crear proyecto en supabase.com
-# 2. Settings → Database → Connection string (URI)
+# 2. Settings â†’ Database â†’ Connection string (URI)
 # 3. Copiar y pegar en DATABASE_URL
 
-# OPCIÓN B: PostgreSQL Local
+# OPCIÃ“N B: PostgreSQL Local
 # 1. Instalar PostgreSQL 14+
 # 2. Crear database:
-#    createdb stragora_alliance_crm
+#    createdb BRIQIA_alliance_crm
 # 3. Connection string:
-#    postgresql://postgres:password@localhost:5432/stragora_alliance_crm
+#    postgresql://postgres:password@localhost:5432/BRIQIA_alliance_crm
 ```
 
 ---
 
-## Fase 2: Inicialización de BD
+## Fase 2: InicializaciÃ³n de BD
 
 ### 2.1 Crear Tablas
 ```bash
@@ -72,7 +72,7 @@ SELECT * FROM kanban_columns;  -- Ver columnas Kanban
 
 | columnas Kanban | orden | color |
 |---|---|---|
-| Frío | 1 | #6B7280 |
+| FrÃ­o | 1 | #6B7280 |
 | Tibios | 2 | #F59E0B |
 | Visitas | 3 | #3B82F6 |
 | Calientes | 4 | #EF4444 |
@@ -80,13 +80,13 @@ SELECT * FROM kanban_columns;  -- Ver columnas Kanban
 
 ---
 
-## Fase 3: Instalación de Dependencias
+## Fase 3: InstalaciÃ³n de Dependencias
 
 ```bash
 # Instalar todos los packages del package.json
 npm install
 
-# Verificar instalación
+# Verificar instalaciÃ³n
 npm list react next
 
 # Limpiar cache si hay problemas
@@ -114,15 +114,15 @@ npm install
 npm run dev
 
 # Output esperado:
-# ▲ Next.js 14.0.0
+# â–² Next.js 14.0.0
 # - Local:        http://localhost:3000
 # - Environments: .env.local
 ```
 
-### 4.2 Acceder a aplicación
+### 4.2 Acceder a aplicaciÃ³n
 ```
 http://localhost:3000
-→ Auto-redirige a /login (si no autenticado)
+â†’ Auto-redirige a /login (si no autenticado)
 ```
 
 ### 4.3 Login
@@ -130,73 +130,73 @@ http://localhost:3000
 Usuario: admin
 Password: Admin@123
 
-→ Redirecciona a /dashboard
+â†’ Redirecciona a /dashboard
 ```
 
 ---
 
 ## Fase 5: Testing de Funcionalidades
 
-### ✅ Test 1: Autenticación
+### âœ… Test 1: AutenticaciÃ³n
 - [ ] Login con admin/Admin@123
 - [ ] Token aparece en localStorage.auth_token
 - [ ] Dashboard muestra usuario "Administrador"
-- [ ] Click "Cerrar Sesión" limpia token
+- [ ] Click "Cerrar SesiÃ³n" limpia token
 - [ ] Redirecciona a /login
 
-### ✅ Test 2: Dashboard
-- [ ] Cargan estadísticas (Total, Últimos 7, Últimos 30 días)
+### âœ… Test 2: Dashboard
+- [ ] Cargan estadÃ­sticas (Total, Ãšltimos 7, Ãšltimos 30 dÃ­as)
 - [ ] Info del usuario es correcta
-- [ ] Links rápidos funcionales
+- [ ] Links rÃ¡pidos funcionales
 
-### ✅ Test 3: Navegación (Sidebar)
+### âœ… Test 3: NavegaciÃ³n (Sidebar)
 - [ ] Todos los links del sidebar funcionan
 - [ ] Indicador "activo" funciona
 - [ ] Collapse/expand en mobile
 - [ ] Logo y nombre visible
 
-### ✅ Test 4: Kanban Board
+### âœ… Test 4: Kanban Board
 - [ ] Se cargan todas las columnas
 - [ ] Leads distribuidos por estado
 - [ ] Contador de leads por columna correcto
 
-### ✅ Test 5: Drag & Drop
+### âœ… Test 5: Drag & Drop
 - [ ] Seleccionar lead
 - [ ] Arrastrar a otra columna
 - [ ] Lead desaparece de columna origen
 - [ ] Lead aparece en columna destino
 - [ ] BD actualizada (verificar con SELECT)
 
-### ✅ Test 6: Modal Edición
-- [ ] Click en lead → abre modal
-- [ ] Click "Editar" → campos se hacen inputs
+### âœ… Test 6: Modal EdiciÃ³n
+- [ ] Click en lead â†’ abre modal
+- [ ] Click "Editar" â†’ campos se hacen inputs
 - [ ] Cambiar campo (ej: zona)
 - [ ] Click "Guardar"
 - [ ] Modal se cierra
 - [ ] Cambio visible en BD
 
-### ✅ Test 7: Búsqueda y Filtros
-- [ ] Escribir en search box → filtra por nombre/teléfono
-- [ ] Seleccionar propiedad → filtra leads
-- [ ] Clear filters → muestra todos
+### âœ… Test 7: BÃºsqueda y Filtros
+- [ ] Escribir en search box â†’ filtra por nombre/telÃ©fono
+- [ ] Seleccionar propiedad â†’ filtra leads
+- [ ] Clear filters â†’ muestra todos
 
-### ✅ Test 8: Crear Columna (Admin Only)
-- [ ] Buscar botón "+" para nueva columna
-- [ ] Click → abre modal
+### âœ… Test 8: Crear Columna (Admin Only)
+- [ ] Buscar botÃ³n "+" para nueva columna
+- [ ] Click â†’ abre modal
 - [ ] Ingresar nombre
 - [ ] Seleccionar color
 - [ ] Click "Guardar"
 - [ ] Nueva columna aparece
 - [ ] BD actualizada
 
-### ✅ Test 9: WhatsApp Integration
+### âœ… Test 9: WhatsApp Integration
 - [ ] Hover en lead card
-- [ ] Click botón WhatsApp
-- [ ] Abre wa.me con número
+- [ ] Click botÃ³n WhatsApp
+- [ ] Abre wa.me con nÃºmero
 
-### ✅ Test 10: Agent ON/OFF (Admin Only)
-- [ ] Botón visible solo si usuario es admin
-- [ ] Click ON → cambio en `agent_status.is_active`
+### âœ… Test 10: Agent ON/OFF (Admin Only)
+- [ ] BotÃ³n visible solo si usuario es admin
+- [ ] Click ON â†’ cambio en `agent_status.is_active`
 - [ ] n8n detecta cambio y ajusta comportamiento
 
 ---
@@ -209,7 +209,7 @@ Password: Admin@123
 npm run build
 
 # Output esperado:
-# ✓ Built in 45.2s
+# âœ“ Built in 45.2s
 # Compiled successfully
 ```
 
@@ -221,7 +221,7 @@ npm run start
 # Acceder a http://localhost:3000
 ```
 
-### 6.3 Verificar producción
+### 6.3 Verificar producciÃ³n
 ```bash
 # Verificar que no hay errores
 npm run lint
@@ -234,27 +234,27 @@ npm run test
 
 ## Fase 7: Deployment
 
-### Opción A: Vercel (RECOMENDADO)
+### OpciÃ³n A: Vercel (RECOMENDADO)
 ```bash
 # 1. Conectar repo de GitHub a vercel.com
 # 2. Seleccionar Next.js en framework
 # 3. Agregar variables de entorno (Settings)
-# 4. Deploy automático en push a main
+# 4. Deploy automÃ¡tico en push a main
 ```
 
-### Opción B: Docker
+### OpciÃ³n B: Docker
 ```bash
 # Construir imagen
-docker build -t stragora-alliance-crm .
+docker build -t BRIQIA-alliance-crm .
 
 # Ejecutar
 docker run -p 3000:3000 \
   -e DATABASE_URL=postgresql://... \
   -e JWT_SECRET=... \
-  stragora-alliance-crm
+  BRIQIA-alliance-crm
 ```
 
-### Opción C: Self-hosted (Ubuntu/Debian)
+### OpciÃ³n C: Self-hosted (Ubuntu/Debian)
 ```bash
 # 1. SSH a servidor
 ssh root@tu-server.com
@@ -287,49 +287,49 @@ pm2 save
 
 ## Troubleshooting
 
-### ❌ Error: "DATABASE_URL no está definida"
+### âŒ Error: "DATABASE_URL no estÃ¡ definida"
 ```
-Solución:
+SoluciÃ³n:
 1. Verificar .env.local existe
 2. npm run dev (reiniciar)
 3. Verificar DATABASE_URL en .env.local
 ```
 
-### ❌ Error: "Cannot connect to PostgreSQL"
+### âŒ Error: "Cannot connect to PostgreSQL"
 ```
-Solución:
+SoluciÃ³n:
 1. Verificar credentials en DATABASE_URL
 2. psql $DATABASE_URL para testear
 3. Verificar puerto (default 5432)
 4. En Supabase: verificar IP whitelist
 ```
 
-### ❌ Error: "Module not found: pg"
+### âŒ Error: "Module not found: pg"
 ```
-Solución:
+SoluciÃ³n:
 npm install pg --save
 ```
 
-### ❌ Error: "Leads no cargan"
+### âŒ Error: "Leads no cargan"
 ```
-Solución:
+SoluciÃ³n:
 1. Verificar sql/init-auth.sql ejecutado
-2. Verificar n8n está agregando leads
+2. Verificar n8n estÃ¡ agregando leads
 3. Verificar rol tiene acceso (jwt valid)
 4. Revisar browser console para errores
 ```
 
-### ❌ Error: "Drag & drop no funciona"
+### âŒ Error: "Drag & drop no funciona"
 ```
-Solución:
-1. Limpiar cache: F12 → Application → Clear
+SoluciÃ³n:
+1. Limpiar cache: F12 â†’ Application â†’ Clear
 2. Verificar onDragStart/Over/Leave/Drop en KanbanBoard
-3. Verificar estado `draggedLead` está actualizando
+3. Verificar estado `draggedLead` estÃ¡ actualizando
 ```
 
-### ❌ Error: "Login da 401"
+### âŒ Error: "Login da 401"
 ```
-Solución:
+SoluciÃ³n:
 1. Verificar sql/init-auth.sql ejecutado
 2. Verificar usuario existe en BD
 3. Verificar password es correcta (Admin@123)
@@ -338,7 +338,7 @@ Solución:
 
 ---
 
-## Monitoreo en Producción
+## Monitoreo en ProducciÃ³n
 
 ### Logs
 ```bash
@@ -346,7 +346,7 @@ Solución:
 pm2 logs crm
 
 # Docker logs
-docker logs -f stragora-alliance-crm
+docker logs -f BRIQIA-alliance-crm
 ```
 
 ### Performance
@@ -366,12 +366,12 @@ pg_dump $DATABASE_URL > backup-$(date +%Y%m%d).sql
 # Restore
 psql $DATABASE_URL < backup-20240101.sql
 
-# Supabase: Settings → Backups → Automated
+# Supabase: Settings â†’ Backups â†’ Automated
 ```
 
 ---
 
-## 📋 Checklist Final
+## ðŸ“‹ Checklist Final
 
 - [ ] Node 18+ instalado
 - [ ] .env.local creado con DATABASE_URL y JWT_SECRET
@@ -382,15 +382,15 @@ psql $DATABASE_URL < backup-20240101.sql
 - [ ] Login funciona (admin/Admin@123)
 - [ ] Kanban carga y display leads
 - [ ] Drag & drop funciona
-- [ ] Modal de edición funciona
+- [ ] Modal de ediciÃ³n funciona
 - [ ] WhatsApp link funciona
 - [ ] Sidebar navega correctamente
-- [ ] Admin ve botón ON/OFF agente
+- [ ] Admin ve botÃ³n ON/OFF agente
 - [ ] npm run build completa exitosamente
 - [ ] Todo listo para production
 
 ---
 
-**🎉 ¡LISTO PARA PRODUCCIÓN!**
+**ðŸŽ‰ Â¡LISTO PARA PRODUCCIÃ“N!**
 
-Para soporte: [documentación completa en ARQUITECTURA-CRM-STRAGORA-ALLIANCE.md]
+Para soporte: [documentaciÃ³n completa en ARQUITECTURA-CRM-BRIQIA-ALLIANCE.md]
