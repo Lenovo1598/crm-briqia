@@ -1,85 +1,85 @@
-﻿# ðŸ” RESUMEN DE IMPLEMENTACIÃ“N â€” AutenticaciÃ³n JWT
+# 🔐 RESUMEN DE IMPLEMENTACIÓN — Autenticación JWT
 
-## Â¿QuÃ© Se CreÃ³?
+## ¿Qué Se Creó?
 
-Sistema completo de autenticaciÃ³n JWT para **Briqia CRM** siguiendo exactamente la arquitectura del `ARQUITECTURA-CRM-BRIQIA-ALLIANCE.md`.
-
----
-
-## ðŸ“‚ Carpeta de Archivos Importantes
-
-```
-ðŸ“¦ CRM/
-â”œâ”€â”€ ðŸ” SEGURIDAD
-â”‚   â”œâ”€â”€ middleware.ts              â† Valida JWT en TODAS las rutas
-â”‚   â”œâ”€â”€ lib/auth.ts                â† Funciones JWT + bcrypt
-â”‚   â””â”€â”€ lib/db.ts                  â† ConexiÃ³n PostgreSQL
-â”‚
-â”œâ”€â”€ ðŸŒ API ROUTES
-â”‚   â””â”€â”€ app/api/auth/
-â”‚       â”œâ”€â”€ login/route.ts         â† POST: username + password â†’ JWT
-â”‚       â””â”€â”€ me/route.ts            â† GET: obtener usuario actual
-â”‚
-â”œâ”€â”€ ðŸ’» FRONTEND
-â”‚   â”œâ”€â”€ hooks/useAuth.tsx          â† Hook + Context
-â”‚   â”œâ”€â”€ components/layout/
-â”‚   â”‚   â””â”€â”€ AuthGuard.tsx          â† Protege rutas
-â”‚   â”œâ”€â”€ app/login/page.tsx         â† PÃ¡gina login
-â”‚   â””â”€â”€ app/dashboard/page.tsx     â† Dashboard protegido
-â”‚
-â”œâ”€â”€ âš™ï¸ CONFIGURACIÃ“N
-â”‚   â”œâ”€â”€ package.json               â† Dependencias
-â”‚   â”œâ”€â”€ tsconfig.json              â† TypeScript
-â”‚   â”œâ”€â”€ tailwind.config.ts         â† Tailwind
-â”‚   â”œâ”€â”€ next.config.js             â† Next.js
-â”‚   â”œâ”€â”€ .env.local                 â† Variables secretas
-â”‚   â””â”€â”€ .env.local.example         â† Template
-â”‚
-â”œâ”€â”€ ðŸ“Š BD
-â”‚   â””â”€â”€ sql/init-auth.sql          â† Script de usuarios
-â”‚
-â””â”€â”€ ðŸ“š DOCS
-    â”œâ”€â”€ AUTH-SETUP.md              â† GuÃ­a completa
-    â”œâ”€â”€ IMPLEMENTACION-JWT.md      â† Este archivo
-    â””â”€â”€ scripts/hash-password.js   â† Generador de hashes
-```
+Sistema completo de autenticación JWT para **Stragora Alliance CRM** siguiendo exactamente la arquitectura del `ARQUITECTURA-CRM-STRAGORA-ALLIANCE.md`.
 
 ---
 
-## ðŸ”„ Flujo de AutenticaciÃ³n
+## 📂 Carpeta de Archivos Importantes
+
+```
+📦 CRM/
+├── 🔐 SEGURIDAD
+│   ├── middleware.ts              ← Valida JWT en TODAS las rutas
+│   ├── lib/auth.ts                ← Funciones JWT + bcrypt
+│   └── lib/db.ts                  ← Conexión PostgreSQL
+│
+├── 🌐 API ROUTES
+│   └── app/api/auth/
+│       ├── login/route.ts         ← POST: username + password → JWT
+│       └── me/route.ts            ← GET: obtener usuario actual
+│
+├── 💻 FRONTEND
+│   ├── hooks/useAuth.tsx          ← Hook + Context
+│   ├── components/layout/
+│   │   └── AuthGuard.tsx          ← Protege rutas
+│   ├── app/login/page.tsx         ← Página login
+│   └── app/dashboard/page.tsx     ← Dashboard protegido
+│
+├── ⚙️ CONFIGURACIÓN
+│   ├── package.json               ← Dependencias
+│   ├── tsconfig.json              ← TypeScript
+│   ├── tailwind.config.ts         ← Tailwind
+│   ├── next.config.js             ← Next.js
+│   ├── .env.local                 ← Variables secretas
+│   └── .env.local.example         ← Template
+│
+├── 📊 BD
+│   └── sql/init-auth.sql          ← Script de usuarios
+│
+└── 📚 DOCS
+    ├── AUTH-SETUP.md              ← Guía completa
+    ├── IMPLEMENTACION-JWT.md      ← Este archivo
+    └── scripts/hash-password.js   ← Generador de hashes
+```
+
+---
+
+## 🔄 Flujo de Autenticación
 
 ```
 1. Usuario va a /login
-                â†“
+                ↓
 2. Ingresa username + password
-                â†“
+                ↓
 3. POST /api/auth/login
-                â†“
+                ↓
 4. Backend verifica en BD + hashPassword
-                â†“
-5. âœ… Correcto â†’ Genera JWT (7 dÃ­as)
-                â†“
+                ↓
+5. ✅ Correcto → Genera JWT (7 días)
+                ↓
 6. Devuelve: { token, user }
-                â†“
+                ↓
 7. Cliente guarda en localStorage
-                â†“
+                ↓
 8. Redirige a /dashboard
-                â†“
-9. Cada request envÃ­a:
+                ↓
+9. Cada request envía:
    Authorization: Bearer <JWT>
-                â†“
+                ↓
 10. Middleware valida JWT
-                â†“
-11. âœ… Si vÃ¡lido â†’ acceso permitido
-âŒ Si expirado â†’ 401 Unauthorized â†’ /login
+                ↓
+11. ✅ Si válido → acceso permitido
+❌ Si expirado → 401 Unauthorized → /login
 ```
 
 ---
 
-## ðŸ”‘ Credenciales Incluidas
+## 🔑 Credenciales Incluidas
 
 ```javascript
-// DespuÃ©s de ejecutar sql/init-auth.sql:
+// Después de ejecutar sql/init-auth.sql:
 
 {
   "usuarios": [
@@ -91,25 +91,25 @@ Sistema completo de autenticaciÃ³n JWT para **Briqia CRM** siguiendo exactamen
     {
       "username": "demo", 
       "password": "Demo@123",
-      "rol": "Usuario (sin botÃ³n ON/OFF)"
+      "rol": "Usuario (sin botón ON/OFF)"
     }
   ]
 }
 
-// âš ï¸ CAMBIAR EN PRODUCCIÃ“N
+// ⚠️ CAMBIAR EN PRODUCCIÓN
 ```
 
 ---
 
-## ðŸ›¡ï¸ Seguridad Implementada
+## 🛡️ Seguridad Implementada
 
-### âœ… ContraseÃ±as
+### ✅ Contraseñas
 ```
 Algoritmo: bcrypt (10 rounds)
 Ejemplo hash: $2a$10$aVKZ6VHQpHQr7MIlVNmzJOhFcVTGfWwFM.r9PW2eXPhXbKzVJBiZC
 ```
 
-### âœ… Tokens JWT
+### ✅ Tokens JWT
 ```
 Formato: HEADER.PAYLOAD.SIGNATURE
 Algoritmo: HS256 (HMAC-SHA256)
@@ -118,26 +118,26 @@ Contenido payload:
     "id": 1,
     "username": "admin",
     "role": "admin",
-    "nombre": "AndrÃ©s Ali",
-    "exp": 1714867200,  // +7 dÃ­as
+    "nombre": "Andrés Ali",
+    "exp": 1714867200,  // +7 días
     "iat": 1714262400
   }
 ```
 
-### âœ… Middleware
+### ✅ Middleware
 - Valida JWT en TODAS las rutas privadas
-- Status 401 si token invÃ¡lido/expirado
-- Rutas pÃºblicas: /login, /api/auth/login
+- Status 401 si token inválido/expirado
+- Rutas públicas: /login, /api/auth/login
 
-### âœ… LocalStorage
+### ✅ LocalStorage
 - Token guardado como: `localStorage.auth_token`
 - Enviado en header: `Authorization: Bearer <token>`
 
 ---
 
-## ðŸš€ Inicio RÃ¡pido
+## 🚀 Inicio Rápido
 
-### 1. InstalaciÃ³n
+### 1. Instalación
 ```bash
 cd /path/to/CRM
 npm install
@@ -151,11 +151,11 @@ JWT_SECRET=<generar con: node -e "console.log(require('crypto').randomBytes(32).
 
 ### 3. Inicializar BD
 ```bash
-# OpciÃ³n A: Supabase
-# â†’ SQL Editor > New Query > pegar sql/init-auth.sql
+# Opción A: Supabase
+# → SQL Editor > New Query > pegar sql/init-auth.sql
 
-# OpciÃ³n B: PostgreSQL local
-psql BRIQIA_alliance_crm < sql/init-auth.sql
+# Opción B: PostgreSQL local
+psql stragora_alliance_crm < sql/init-auth.sql
 ```
 
 ### 4. Desarrollo
@@ -167,26 +167,26 @@ npm run dev
 ### 5. Loguear
 ```
 Usuario: admin
-ContraseÃ±a: Admin@123
+Contraseña: Admin@123
 ```
 
 ---
 
-## ðŸ“‹ API Endpoints
+## 📋 API Endpoints
 
-| MÃ©todo | Ruta | Headers | Body | Respuesta | Status |
+| Método | Ruta | Headers | Body | Respuesta | Status |
 |--------|------|---------|------|-----------|--------|
-| POST | `/api/auth/login` | â€” | `{ username, password }` | `{ token, user }` | 200 âœ… / 401 âŒ |
-| GET | `/api/auth/me` | `Authorization: Bearer <JWT>` | â€” | `{ id, username, role, nombre }` | 200 âœ… / 401 âŒ |
+| POST | `/api/auth/login` | — | `{ username, password }` | `{ token, user }` | 200 ✅ / 401 ❌ |
+| GET | `/api/auth/me` | `Authorization: Bearer <JWT>` | — | `{ id, username, role, nombre }` | 200 ✅ / 401 ❌ |
 
 ---
 
-## ðŸ”§ Crear Nuevo Usuario (DespuÃ©s de Setup)
+## 🔧 Crear Nuevo Usuario (Después de Setup)
 
-### OpciÃ³n A: SQL Directo
+### Opción A: SQL Directo
 ```javascript
 // 1. Generar hash
-node scripts/hash-password.js "MiContraseÃ±a123"
+node scripts/hash-password.js "MiContraseña123"
 
 // 2. Copiar hash (output del comando)
 // 3. Ejecutar SQL:
@@ -197,14 +197,14 @@ INSERT INTO users (username, password, role, nombre)
 VALUES ('nuevo_usuario', '<hash_copiado>', 'user', 'Nombre Completo');
 ```
 
-### OpciÃ³n B: Crear API route de CRUD (Fase 2)
+### Opción B: Crear API route de CRUD (Fase 2)
 - Implementar `POST /api/users` (solo admin)
 - Validar datos
-- Hashear contraseÃ±a automÃ¡ticamente
+- Hashear contraseña automáticamente
 
 ---
 
-## ðŸ§ª Testing
+## 🧪 Testing
 
 ### Login correcto
 ```bash
@@ -219,7 +219,7 @@ curl -X POST http://localhost:3000/api/auth/login \
 #     "id": 1,
 #     "username": "admin",
 #     "role": "admin",
-#     "nombre": "AndrÃ©s Ali"
+#     "nombre": "Andrés Ali"
 #   }
 # }
 ```
@@ -234,7 +234,7 @@ curl -X GET http://localhost:3000/api/auth/me \
 #   "id": 1,
 #   "username": "admin",
 #   "role": "admin",
-#   "nombre": "AndrÃ©s Ali"
+#   "nombre": "Andrés Ali"
 # }
 ```
 
@@ -245,24 +245,24 @@ curl -X POST http://localhost:3000/api/auth/login \
   -d '{"username": "admin", "password": "WrongPassword"}'
 
 # Respuesta esperada (401):
-# {"error": "Usuario o contraseÃ±a incorrectos"}
+# {"error": "Usuario o contraseña incorrectos"}
 ```
 
 ---
 
-## âš ï¸ Variables de Entorno
+## ⚠️ Variables de Entorno
 
 **OBLIGATORIAS:**
-- `DATABASE_URL` â€” ConexiÃ³n PostgreSQL
-- `JWT_SECRET` â€” Secreto para firmar JWT (mÃ­n 32 chars)
+- `DATABASE_URL` — Conexión PostgreSQL
+- `JWT_SECRET` — Secreto para firmar JWT (mín 32 chars)
 
 **OPCIONALES:**
-- `NEXT_PUBLIC_APP_NAME` â€” Nombre app (default: "Briqia")
-- `NODE_ENV` â€” "development" o "production"
+- `NEXT_PUBLIC_APP_NAME` — Nombre app (default: "Stragora Alliance")
+- `NODE_ENV` — "development" o "production"
 
 ---
 
-## ðŸ“Š Tabla Users (Schema)
+## 📊 Tabla Users (Schema)
 
 ```sql
 CREATE TABLE users (
@@ -277,9 +277,9 @@ CREATE TABLE users (
 
 ---
 
-## ðŸ” Troubleshooting
+## 🔍 Troubleshooting
 
-| Problema | SoluciÃ³n |
+| Problema | Solución |
 |----------|----------|
 | Login rechazado | Verificar usuario en BD: `SELECT * FROM users WHERE username='admin';` |
 | 401 Unauthorized | Verificar JWT en header Authorization |
@@ -289,25 +289,25 @@ CREATE TABLE users (
 
 ---
 
-## ðŸ“š Archivos Clave para Modificar Luego
+## 📚 Archivos Clave para Modificar Luego
 
 1. **Agregar roles personalizados:**
-   - `lib/auth.ts` â†’ expandir `type User`
-   - `sql/init-auth.sql` â†’ nuevos valores en CHECK
+   - `lib/auth.ts` → expandir `type User`
+   - `sql/init-auth.sql` → nuevos valores en CHECK
 
-2. **Cambiar expiraciÃ³n JWT:**
-   - `lib/auth.ts` â†’ funciÃ³n `createToken()` â†’ `expiresIn: '30d'`
+2. **Cambiar expiración JWT:**
+   - `lib/auth.ts` → función `createToken()` → `expiresIn: '30d'`
 
 3. **Agregar 2FA (futuro):**
-   - `app/api/auth/login/route.ts` â†’ validaciÃ³n extra
-   - `app/login/page.tsx` â†’ formulario 2FA
+   - `app/api/auth/login/route.ts` → validación extra
+   - `app/login/page.tsx` → formulario 2FA
 
 4. **Rate limiting:**
-   - `app/api/auth/login/route.ts` â†’ agregar middleware de rate limit
+   - `app/api/auth/login/route.ts` → agregar middleware de rate limit
 
 ---
 
-## âœ… CHECKLIST FINAL
+## ✅ CHECKLIST FINAL
 
 - [ ] `npm install` ejecutado
 - [ ] `.env.local` con DATABASE_URL y JWT_SECRET
@@ -322,8 +322,8 @@ CREATE TABLE users (
 
 ---
 
-**ðŸŽ‰ Â¡AUTENTICACIÃ“N JWT LISTA!**
+**🎉 ¡AUTENTICACIÓN JWT LISTA!**
 
-Siguiente: Migrar Kanban de leads + integraciÃ³n con BD
+Siguiente: Migrar Kanban de leads + integración con BD
 
-Referencia: `ARQUITECTURA-CRM-BRIQIA-ALLIANCE.md` âœ…
+Referencia: `ARQUITECTURA-CRM-STRAGORA-ALLIANCE.md` ✅

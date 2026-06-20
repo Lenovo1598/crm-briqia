@@ -1,180 +1,180 @@
-﻿# ðŸ“Š MIGRACIÃ“N KANBAN DE LEADS â€” COMPLETADA
+# 📊 MIGRACIÓN KANBAN DE LEADS — COMPLETADA
 
-## âœ… Archivos Creados
+## ✅ Archivos Creados
 
-### ðŸ—„ï¸ Base de Datos
-- âœ… `sql/init-kanban.sql` â€” Tabla kanban_columns con datos iniciales
+### 🗄️ Base de Datos
+- ✅ `sql/init-kanban.sql` — Tabla kanban_columns con datos iniciales
 
-### ðŸ› ï¸ Utilidades
-- âœ… `lib/leads.ts` â€” Tipos (Lead, KanbanColumn) + funciones helper
-  - `estadoToColumn()` â€” mapeo estado â†’ nombre columna
-  - `columnToEstado()` â€” mapeo inverso
-  - `formatCurrency()` â€” formato USD
-  - `getLeadDisplayName()` â€” obtener nombre visible
-  - `getUniqueProperties()` â€” propiedades Ãºnicas de leads
+### 🛠️ Utilidades
+- ✅ `lib/leads.ts` — Tipos (Lead, KanbanColumn) + funciones helper
+  - `estadoToColumn()` — mapeo estado → nombre columna
+  - `columnToEstado()` — mapeo inverso
+  - `formatCurrency()` — formato USD
+  - `getLeadDisplayName()` — obtener nombre visible
+  - `getUniqueProperties()` — propiedades únicas de leads
 
-### ðŸŒ API Routes
-- âœ… `app/api/leads/route.ts` â€” GET (con filtros) y POST
-  - GET: filtrado por estado, bÃºsqueda, propiedad
+### 🌐 API Routes
+- ✅ `app/api/leads/route.ts` — GET (con filtros) y POST
+  - GET: filtrado por estado, búsqueda, propiedad
   - POST: crear nuevo lead
   
-- âœ… `app/api/leads/[id]/route.ts` â€” GET, PUT, DELETE lead individual
-  - PUT: actualizaciÃ³n selectiva de campos
+- ✅ `app/api/leads/[id]/route.ts` — GET, PUT, DELETE lead individual
+  - PUT: actualización selectiva de campos
   - DELETE: eliminar lead
 
-- âœ… `app/api/columns/route.ts` â€” GET y POST columnas
+- ✅ `app/api/columns/route.ts` — GET y POST columnas
   - GET: obtener todas ordenadas
   - POST: crear nueva columna
 
-- âœ… `app/api/columns/[id]/route.ts` â€” PUT y DELETE columnas individuales
+- ✅ `app/api/columns/[id]/route.ts` — PUT y DELETE columnas individuales
 
-- âœ… `app/api/agent/route.ts` â€” GET/PUT estado del agente (ON/OFF)
+- ✅ `app/api/agent/route.ts` — GET/PUT estado del agente (ON/OFF)
   - GET: obtener estado actual
   - PUT: cambiar estado (solo admin)
 
-### ðŸ’» Componentes React
-- âœ… `components/leads/LeadCard.tsx` â€” Tarjeta individual de lead
+### 💻 Componentes React
+- ✅ `components/leads/LeadCard.tsx` — Tarjeta individual de lead
   - Drag & drop
   - Click para editar
-  - Botones WhatsApp y ediciÃ³n en hover
+  - Botones WhatsApp y edición en hover
 
-- âœ… `components/leads/KanbanColumn.tsx` â€” Columna del Kanban
+- ✅ `components/leads/KanbanColumn.tsx` — Columna del Kanban
   - Drop zone
   - Contador de leads
   - Drag over highlight
 
-- âœ… `components/leads/LeadModal.tsx` â€” Modal detalle/ediciÃ³n
+- ✅ `components/leads/LeadModal.tsx` — Modal detalle/edición
   - Vista lectura: grid 2 columnas
-  - Vista ediciÃ³n: formulario completo
+  - Vista edición: formulario completo
   - Guardar cambios a BD
 
-- âœ… `components/leads/AddColumnModal.tsx` â€” Modal crear columna
+- ✅ `components/leads/AddColumnModal.tsx` — Modal crear columna
   - Selector de color
-  - ValidaciÃ³n de nombre
+  - Validación de nombre
 
-- âœ… `components/leads/KanbanBoard.tsx` â€” Orquestador del Kanban
+- ✅ `components/leads/KanbanBoard.tsx` — Orquestador del Kanban
   - Manejo de drag & drop
-  - Filtros (bÃºsqueda + propiedades)
-  - IntegraciÃ³n API
-  - BotÃ³n ON/OFF agente (admin)
+  - Filtros (búsqueda + propiedades)
+  - Integración API
+  - Botón ON/OFF agente (admin)
 
-- âœ… `components/layout/Sidebar.tsx` â€” NavegaciÃ³n lateral
+- ✅ `components/layout/Sidebar.tsx` — Navegación lateral
   - Colapsable
-  - Secciones: General, MensajerÃ­a, Cartera, Asistentes
+  - Secciones: General, Mensajería, Cartera, Asistentes
   - Indicador activo
   - User info + logout
 
-### ðŸ“„ PÃ¡ginas
-- âœ… `app/leads/page.tsx` â€” PÃ¡gina principal del Kanban
+### 📄 Páginas
+- ✅ `app/leads/page.tsx` — Página principal del Kanban
   - Carga leads y columnas
   - Protegida con AuthGuard
   - Toggle ON/OFF agente
 
-- âœ… `app/page.tsx` â€” RedirecciÃ³n inteligente
-  - Usuario autenticado â†’ /dashboard
-  - No autenticado â†’ /login
+- ✅ `app/page.tsx` — Redirección inteligente
+  - Usuario autenticado → /dashboard
+  - No autenticado → /login
 
-- âœ… `app/dashboard/page.tsx` â€” Dashboard mejorado
-  - EstadÃ­sticas de leads (total, Ãºltimos 7, Ãºltimos 30)
+- ✅ `app/dashboard/page.tsx` — Dashboard mejorado
+  - Estadísticas de leads (total, últimos 7, últimos 30)
   - Info del usuario
-  - Links rÃ¡pidos
+  - Links rápidos
 
-- âœ… `app/layout.tsx` â€” Layout actualizado con Sidebar
+- ✅ `app/layout.tsx` — Layout actualizado con Sidebar
 
 ---
 
-## ðŸŽ¯ CaracterÃ­sticas Implementadas
+## 🎯 Características Implementadas
 
-### âœ¨ Funcionalidades
-âœ… **Kanban Drag & Drop**
+### ✨ Funcionalidades
+✅ **Kanban Drag & Drop**
 - Arrastra leads entre columnas
-- ActualizaciÃ³n en BD al soltar
+- Actualización en BD al soltar
 - Highlight al pasar sobre columna
 
-âœ… **Filtros**
-- BÃºsqueda por nombre/telÃ©fono en tiempo real
-- Filtro por propiedad de interÃ©s
-- Contador dinÃ¡mico de leads por columna
+✅ **Filtros**
+- Búsqueda por nombre/teléfono en tiempo real
+- Filtro por propiedad de interés
+- Contador dinámico de leads por columna
 
-âœ… **Modal de EdiciÃ³n**
+✅ **Modal de Edición**
 - Vista lectura: todos los campos
-- Vista ediciÃ³n: formulario con selects
+- Vista edición: formulario con selects
 - Guardar cambios directamente a BD
 
-âœ… **GestiÃ³n de Columnas**
+✅ **Gestión de Columnas**
 - Ver todas las columnas
 - Crear nueva columna (nombre + color)
 - Delete columna (futura)
 
-âœ… **IntegraciÃ³n WhatsApp**
-- BotÃ³n para abrir chat (wa.me)
+✅ **Integración WhatsApp**
+- Botón para abrir chat (wa.me)
 - Mostrado en hover de tarjeta
 
-âœ… **Control de Agente (Admin Only)**
-- BotÃ³n ON/OFF visible solo para admin
+✅ **Control de Agente (Admin Only)**
+- Botón ON/OFF visible solo para admin
 - Status guardado en `agent_status`
 - n8n consulta este valor
 
 ---
 
-## ðŸ“Š Flujo de Datos
+## 📊 Flujo de Datos
 
 ```
 BD (PostgreSQL/Supabase)
-    â†“
+    ↓
 /api/leads (GET con filtros)
-    â†“
-useState â†’ leads, columns
-    â†“
+    ↓
+useState → leads, columns
+    ↓
 Render Kanban
-    â†“
-Usuario interactÃºa (drag, click, edita)
-    â†“
+    ↓
+Usuario interactúa (drag, click, edita)
+    ↓
 POST/PUT /api/leads o /api/columns
-    â†“
+    ↓
 BD actualizada
-    â†“
-State actualizado â†’ Re-render
+    ↓
+State actualizado → Re-render
 ```
 
 ---
 
-## ðŸ”„ Estados de un Lead
+## 🔄 Estados de un Lead
 
 | Estado | Significado | Color |
 |--------|-----------|-------|
 | frio | No ha respondido | Gris #6B7280 |
-| tibio | MostrÃ³ interÃ©s inicial | Amarillo #F59E0B |
-| visita | Ya visitÃ³ propiedad | Azul #3B82F6 |
+| tibio | Mostró interés inicial | Amarillo #F59E0B |
+| visita | Ya visitó propiedad | Azul #3B82F6 |
 | caliente | Gran probabilidad compra | Rojo #EF4444 |
 | llamada | Pendiente llamada | Verde #10B981 |
-| busqueda | En bÃºsqueda activa | (custom) |
+| busqueda | En búsqueda activa | (custom) |
 
 ---
 
-## ðŸ“± Responsivas
+## 📱 Responsivas
 
-âœ… Todos los componentes son responsive
-âœ… Sidebar colapsable en mobile
-âœ… Modales ajustables
-âœ… Kanban scrolleable
-
----
-
-## ðŸ” Seguridad
-
-âœ… Todas las rutas API protegidas con JWT
-âœ… BotÃ³n ON/OFF: solo admin (verificado en backend)
-âœ… Middleware valida autorizaciÃ³n
+✅ Todos los componentes son responsive
+✅ Sidebar colapsable en mobile
+✅ Modales ajustables
+✅ Kanban scrolleable
 
 ---
 
-## ðŸš€ CÃ³mo Usar
+## 🔐 Seguridad
+
+✅ Todas las rutas API protegidas con JWT
+✅ Botón ON/OFF: solo admin (verificado en backend)
+✅ Middleware valida autorización
+
+---
+
+## 🚀 Cómo Usar
 
 ### 1. Setup BD
 ```bash
-# Ejecutar SQL de inicializaciÃ³n
-psql BRIQIA_alliance_crm < sql/init-kanban.sql
+# Ejecutar SQL de inicialización
+psql stragora_alliance_crm < sql/init-kanban.sql
 ```
 
 ### 2. Iniciar App
@@ -186,80 +186,80 @@ npm run dev
 ### 3. Login y Navegar
 ```
 Usuario: admin
-ContraseÃ±a: Admin@123
+Contraseña: Admin@123
 
-â†’ Dashboard
-â†’ Click "Tablero de Leads"
-â†’ Ver y gestionar leads
+→ Dashboard
+→ Click "Tablero de Leads"
+→ Ver y gestionar leads
 ```
 
 ---
 
-## ðŸ“‹ Campos Editables de Lead
+## 📋 Campos Editables de Lead
 
-- **nombre** â€” Nombre del cliente (texto)
-- **estado** â€” PosiciÃ³n en Kanban (select: frio/tibio/visita/caliente/llamada)
-- **presupuesto** â€” Rango USD (nÃºmero)
-- **zona** â€” Zona/localidad (texto)
-- **tipo_propiedad** â€” Tipo inmueble (select: depto/casa/ph/terreno/local)
-- **forma_pago** â€” Forma pago (select: contado/financiado/hipotecario/mixto)
-- **intencion** â€” Comprar o vender (select)
-- **propiedad_interes** â€” DirecciÃ³n de propiedad consultada (texto)
+- **nombre** — Nombre del cliente (texto)
+- **estado** — Posición en Kanban (select: frio/tibio/visita/caliente/llamada)
+- **presupuesto** — Rango USD (número)
+- **zona** — Zona/localidad (texto)
+- **tipo_propiedad** — Tipo inmueble (select: depto/casa/ph/terreno/local)
+- **forma_pago** — Forma pago (select: contado/financiado/hipotecario/mixto)
+- **intencion** — Comprar o vender (select)
+- **propiedad_interes** — Dirección de propiedad consultada (texto)
 
 ---
 
-## ðŸŽ¨ Componentes Reutilizables
+## 🎨 Componentes Reutilizables
 
-El sistema estÃ¡ 100% componentizado para fÃ¡cil mantenimiento:
+El sistema está 100% componentizado para fácil mantenimiento:
 
 ```
 components/leads/
-â”œâ”€â”€ LeadCard.tsx           â† Tarjeta individual
-â”œâ”€â”€ KanbanColumn.tsx       â† Columna
-â”œâ”€â”€ KanbanBoard.tsx        â† Orquestador
-â”œâ”€â”€ LeadModal.tsx          â† Modal ediciÃ³n
-â””â”€â”€ AddColumnModal.tsx     â† Modal columna nueva
+├── LeadCard.tsx           ← Tarjeta individual
+├── KanbanColumn.tsx       ← Columna
+├── KanbanBoard.tsx        ← Orquestador
+├── LeadModal.tsx          ← Modal edición
+└── AddColumnModal.tsx     ← Modal columna nueva
 
 components/layout/
-â”œâ”€â”€ Sidebar.tsx            â† NavegaciÃ³n
-â””â”€â”€ AuthGuard.tsx          â† ProtecciÃ³n
+├── Sidebar.tsx            ← Navegación
+└── AuthGuard.tsx          ← Protección
 ```
 
 ---
 
-## ðŸ”§ PrÃ³ximos Pasos (Fase 2)
+## 🔧 Próximos Pasos (Fase 2)
 
-- [ ] Centro de ComunicaciÃ³n (Chats)
+- [ ] Centro de Comunicación (Chats)
 - [ ] Mensajes Programados
 - [ ] Propiedades Kanban
-- [ ] GestiÃ³n de usuarios (CRUD admin)
-- [ ] BÃºsquedas
-- [ ] CampaÃ±as Activas
+- [ ] Gestión de usuarios (CRUD admin)
+- [ ] Búsquedas
+- [ ] Campañas Activas
 - [ ] Two-factor authentication
-- [ ] Logs de auditorÃ­a
+- [ ] Logs de auditoría
 
 ---
 
-## âœ… CHECKLIST FINAL
+## ✅ CHECKLIST FINAL
 
 - [ ] Ejecutar `sql/init-kanban.sql`
 - [ ] `npm run dev`
 - [ ] Login en /login
-- [ ] Ver dashboard estadÃ­sticas
+- [ ] Ver dashboard estadísticas
 - [ ] Click en "Tablero de Leads"
 - [ ] Ver todos los leads en columnas
 - [ ] Arrastrar lead entre columnas (drag & drop)
-- [ ] Click en lead â†’ editar modal
-- [ ] Cambiar algÃºn campo y guardar
-- [ ] Crear nueva columna (botÃ³n +)
+- [ ] Click en lead → editar modal
+- [ ] Cambiar algún campo y guardar
+- [ ] Crear nueva columna (botón +)
 - [ ] Verificar filtros funcionan
-- [ ] Si es admin: ver botÃ³n ON/OFF agente
+- [ ] Si es admin: ver botón ON/OFF agente
 - [ ] Click WhatsApp en tarjeta
 
 ---
 
-**ðŸŽ‰ Â¡KANBAN MIGRADO Y FUNCIONAL!**
+**🎉 ¡KANBAN MIGRADO Y FUNCIONAL!**
 
-Referencia: `ARQUITECTURA-CRM-BRIQIA-ALLIANCE.md` âœ…
+Referencia: `ARQUITECTURA-CRM-STRAGORA-ALLIANCE.md` ✅
 
-Stack: Next.js 14 + React + TypeScript + Tailwind + PostgreSQL âœ…
+Stack: Next.js 14 + React + TypeScript + Tailwind + PostgreSQL ✅
